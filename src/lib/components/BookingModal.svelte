@@ -33,24 +33,24 @@
 		onkeydown={(e) => e.key === 'Escape' && onClose()}
 	>
 		<div
-			class="w-full max-w-lg rounded-2xl border border-[#CBD5E1] bg-white p-6 sm:p-8 shadow-2xl animate-in fade-in zoom-in-95 duration-200"
+			class="w-full max-w-lg rounded-2xl border border-[#d8c7b5] bg-[#fbf8f5] p-6 sm:p-8 shadow-2xl animate-in fade-in zoom-in-95 duration-200"
 			onclick={(e) => e.stopPropagation()}
 			role="none"
 		>
-			<div class="flex items-center justify-between border-b border-[#E5E7EB] pb-4">
+			<div class="flex items-center justify-between border-b border-[#e2d5c7] pb-4">
 				<div class="flex items-center gap-2.5">
-					<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0F172A] text-white">
+					<div class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#9a0002] text-[#efe6dd]">
 						<Calendar class="h-4 w-4" />
 					</div>
 					<div>
-						<h3 class="text-base font-bold text-[#0F172A]">Book Architecture Discussion</h3>
-						<span class="text-xs text-[#64748B]">Aishwarya S &bull; Bangalore, India (IST)</span>
+						<h3 class="text-lg font-bold text-[#231510]">Book Architecture Discussion</h3>
+						<span class="text-xs text-[#7a665e]">Aishwarya S &bull; Bangalore, India (IST)</span>
 					</div>
 				</div>
 				<button
 					type="button"
 					onclick={onClose}
-					class="rounded-full p-1.5 text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#0F172A] cursor-pointer"
+					class="rounded-full p-1.5 text-[#7a665e] hover:bg-[#efe6dd] hover:text-[#9a0002] cursor-pointer"
 				>
 					<X class="h-5 w-5" />
 				</button>
@@ -58,30 +58,30 @@
 
 			{#if submitted}
 				<div class="py-12 text-center space-y-3">
-					<div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+					<div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#efe6dd] text-[#9a0002]">
 						<CheckCircle2 class="h-6 w-6" />
 					</div>
-					<h4 class="text-lg font-bold text-[#0F172A]">Call Request Dispatched!</h4>
-					<p class="text-xs text-[#64748B] max-w-xs mx-auto">
-						Thank you! Aishwarya will confirm the invitation slot to <span class="font-mono text-[#0F172A]">{guestEmail}</span> shortly.
+					<h4 class="text-xl font-bold text-[#231510]">Call Request Dispatched!</h4>
+					<p class="text-xs text-[#7a665e] max-w-xs mx-auto">
+						Thank you! Aishwarya will confirm the invitation slot to <span class="font-mono text-[#9a0002] font-semibold">{guestEmail}</span> shortly.
 					</p>
 				</div>
 			{:else}
 				<form onsubmit={handleSubmit} class="mt-6 space-y-5">
 					<!-- Duration selector -->
 					<div>
-						<div class="block text-xs font-mono font-medium text-[#475569] uppercase mb-2">Select Format</div>
+						<div class="block text-xs font-mono font-medium text-[#7a665e] uppercase mb-2">Select Format</div>
 						<div class="grid grid-cols-2 gap-3">
 							<button
 								type="button"
 								onclick={() => meetingType = 'intro'}
-								class="flex flex-col items-start rounded-xl border p-3 text-left transition-all cursor-pointer {meetingType === 'intro' ? 'border-[#0F172A] bg-[#0F172A] text-white' : 'border-[#E2E8F0] hover:border-[#94A3B8]'}"
+								class="flex flex-col items-start rounded-xl border p-3 text-left transition-all cursor-pointer {meetingType === 'intro' ? 'border-[#9a0002] bg-[#9a0002] text-[#efe6dd] shadow-sm' : 'border-[#e2d5c7] bg-[#efe6dd] text-[#231510] hover:border-[#9a0002]'}"
 							>
 								<div class="flex items-center gap-1.5 text-xs font-semibold">
 									<Clock class="h-3.5 w-3.5" />
 									<span>15 Min Intro</span>
 								</div>
-								<span class="text-[11px] {meetingType === 'intro' ? 'text-neutral-300' : 'text-[#64748B]'} mt-1">
+								<span class="text-[11px] {meetingType === 'intro' ? 'text-[#efe6dd]/80' : 'text-[#7a665e]'} mt-1">
 									Quick intro &amp; team fit screen
 								</span>
 							</button>
@@ -89,13 +89,13 @@
 							<button
 								type="button"
 								onclick={() => meetingType = 'arch'}
-								class="flex flex-col items-start rounded-xl border p-3 text-left transition-all cursor-pointer {meetingType === 'arch' ? 'border-[#0F172A] bg-[#0F172A] text-white' : 'border-[#E2E8F0] hover:border-[#94A3B8]'}"
+								class="flex flex-col items-start rounded-xl border p-3 text-left transition-all cursor-pointer {meetingType === 'arch' ? 'border-[#9a0002] bg-[#9a0002] text-[#efe6dd] shadow-sm' : 'border-[#e2d5c7] bg-[#efe6dd] text-[#231510] hover:border-[#9a0002]'}"
 							>
 								<div class="flex items-center gap-1.5 text-xs font-semibold">
 									<Video class="h-3.5 w-3.5" />
 									<span>30 Min Deep-Dive</span>
 								</div>
-								<span class="text-[11px] {meetingType === 'arch' ? 'text-neutral-300' : 'text-[#64748B]'} mt-1">
+								<span class="text-[11px] {meetingType === 'arch' ? 'text-[#efe6dd]/80' : 'text-[#7a665e]'} mt-1">
 									Angular &amp; system architecture
 								</span>
 							</button>
@@ -103,66 +103,63 @@
 					</div>
 
 					<!-- Form fields -->
-					<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+					<div class="space-y-3">
 						<div>
-							<label for="b-name" class="block text-xs font-medium text-[#475569] mb-1">Your Name</label>
+							<label for="book-name" class="block text-xs font-mono uppercase text-[#7a665e] mb-1">Your Full Name</label>
 							<input
-								id="b-name"
+								id="book-name"
 								type="text"
 								bind:value={guestName}
 								required
-								placeholder="e.g. Alex Vance"
-								class="w-full rounded-lg border border-[#CBD5E1] px-3 py-2 text-xs text-[#0F172A] focus:border-[#0F172A] focus:outline-none"
+								placeholder="e.g. Alex Morgan"
+								class="w-full rounded-xl border border-[#e2d5c7] bg-[#efe6dd] px-3.5 py-2 text-xs text-[#231510] focus:border-[#9a0002] focus:outline-none"
 							/>
 						</div>
+
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+							<div>
+								<label for="book-email" class="block text-xs font-mono uppercase text-[#7a665e] mb-1">Work Email</label>
+								<input
+									id="book-email"
+									type="email"
+									bind:value={guestEmail}
+									required
+									placeholder="alex@company.com"
+									class="w-full rounded-xl border border-[#e2d5c7] bg-[#efe6dd] px-3.5 py-2 text-xs text-[#231510] focus:border-[#9a0002] focus:outline-none"
+								/>
+							</div>
+
+							<div>
+								<label for="book-org" class="block text-xs font-mono uppercase text-[#7a665e] mb-1">Company / Organization</label>
+								<input
+									id="book-org"
+									type="text"
+									bind:value={guestCompany}
+									placeholder="e.g. Acme FinTech"
+									class="w-full rounded-xl border border-[#e2d5c7] bg-[#efe6dd] px-3.5 py-2 text-xs text-[#231510] focus:border-[#9a0002] focus:outline-none"
+								/>
+							</div>
+						</div>
+
 						<div>
-							<label for="b-email" class="block text-xs font-medium text-[#475569] mb-1">Work Email</label>
-							<input
-								id="b-email"
-								type="email"
-								bind:value={guestEmail}
-								required
-								placeholder="alex@company.com"
-								class="w-full rounded-lg border border-[#CBD5E1] px-3 py-2 text-xs text-[#0F172A] focus:border-[#0F172A] focus:outline-none"
-							/>
+							<label for="book-note" class="block text-xs font-mono uppercase text-[#7a665e] mb-1">Discussion Agenda / Context</label>
+							<textarea
+								id="book-note"
+								bind:value={guestNote}
+								rows="3"
+								placeholder="Frontend modernization, Angular Signals architecture, team leadership..."
+								class="w-full rounded-xl border border-[#e2d5c7] bg-[#efe6dd] px-3.5 py-2 text-xs text-[#231510] focus:border-[#9a0002] focus:outline-none resize-none"
+							></textarea>
 						</div>
 					</div>
 
-					<div>
-						<label for="b-company" class="block text-xs font-medium text-[#475569] mb-1">Company / Organization</label>
-						<input
-							id="b-company"
-							type="text"
-							bind:value={guestCompany}
-							placeholder="e.g. FinTech / Enterprise Corp"
-							class="w-full rounded-lg border border-[#CBD5E1] px-3 py-2 text-xs text-[#0F172A] focus:border-[#0F172A] focus:outline-none"
-						/>
-					</div>
-
-					<div>
-						<label for="b-note" class="block text-xs font-medium text-[#475569] mb-1">Discussion Focus / Role Brief</label>
-						<textarea
-							id="b-note"
-							bind:value={guestNote}
-							rows="2"
-							placeholder="We're modernizing our enterprise platform / looking for a Senior SDE lead..."
-							class="w-full rounded-lg border border-[#CBD5E1] px-3 py-2 text-xs text-[#0F172A] focus:border-[#0F172A] focus:outline-none resize-none"
-						></textarea>
-					</div>
-
-					<div class="flex items-center justify-between pt-2">
-						<span class="text-[11px] text-[#64748B]">
-							Or email directly: <a href="mailto:{PERSONAL_INFO.email}" class="underline text-[#0F172A] font-mono">{PERSONAL_INFO.email}</a>
-						</span>
-
-						<button
-							type="submit"
-							class="inline-flex items-center gap-1.5 rounded-full bg-[#0F172A] px-5 py-2 text-xs font-medium text-white hover:bg-black transition-all cursor-pointer"
-						>
-							<span>Confirm Request</span>
-							<ArrowRight class="h-3.5 w-3.5" />
-						</button>
-					</div>
+					<button
+						type="submit"
+						class="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#9a0002] py-3 text-xs sm:text-sm font-medium text-[#efe6dd] shadow-sm transition-all hover:bg-[#7a0002] active:scale-98 cursor-pointer"
+					>
+						<span>Confirm Reservation Request</span>
+						<ArrowRight class="h-4 w-4" />
+					</button>
 				</form>
 			{/if}
 		</div>

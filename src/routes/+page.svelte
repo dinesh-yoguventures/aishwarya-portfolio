@@ -40,7 +40,7 @@
 	}
 </script>
 
-<div class="min-h-screen bg-[#F8F9FA] text-[#0F172A] selection:bg-[#0F172A] selection:text-white">
+<div class="min-h-screen bg-[#efe6dd] text-[#231510] selection:bg-[#9a0002] selection:text-[#efe6dd]">
 	<!-- Top Navigation Bar -->
 	<Navbar
 		onOpenBooking={openBooking}

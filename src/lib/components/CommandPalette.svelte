@@ -78,7 +78,7 @@
 			id: 'call-phone',
 			label: `call-phone &bull; Direct Line: ${PERSONAL_INFO.phoneDisplay}`,
 			category: 'Contact',
-			shortcut: '📞',
+			shortcut: '↵',
 			action: () => {
 				window.location.href = `tel:${PERSONAL_INFO.phone}`;
 				onClose();
@@ -86,8 +86,8 @@
 		},
 		{
 			id: 'book-call',
-			label: 'book-call &bull; Schedule 15-min or 30-min Technical Architecture Call',
-			category: 'Connect',
+			label: 'book-call &bull; Schedule Architecture Discussion',
+			category: 'Calendar',
 			shortcut: '↵',
 			action: () => {
 				onClose();
@@ -96,43 +96,31 @@
 		},
 		{
 			id: 'linkedin',
-			label: 'linkedin &bull; Visit Aishwarya Saravanan on LinkedIn',
-			category: 'Social',
+			label: 'linkedin &bull; Open Verified Profile',
+			category: 'External',
 			shortcut: '↗',
 			action: () => {
 				window.open(PERSONAL_INFO.linkedin, '_blank');
-				onClose();
-			}
-		},
-		{
-			id: 'download-cv',
-			label: 'download-cv &bull; View Senior Frontend Engineer Resume Profile',
-			category: 'Documents',
-			shortcut: '📄',
-			action: () => {
-				window.location.hash = 'contact';
 				onClose();
 			}
 		}
 	];
 
 	let filteredCommands = $derived(
-		searchQuery.trim() === ''
-			? commands
-			: commands.filter(
-					(c) =>
-						c.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-						c.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
-						c.category.toLowerCase().includes(searchQuery.toLowerCase())
-				)
+		commands.filter(cmd => 
+			cmd.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+			cmd.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+			cmd.id.toLowerCase().includes(searchQuery.toLowerCase())
+		)
 	);
 
 	function handleKeyDown(e: KeyboardEvent) {
 		if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
 			e.preventDefault();
-			if (isOpen) onClose();
-			else {
-				// handled by parent or window
+			if (isOpen) {
+				onClose();
+			} else {
+				// Parent handles open
 			}
 		}
 		if (e.key === 'Escape' && isOpen) {
@@ -154,28 +142,28 @@
 	>
 		<!-- Command Palette Modal Container -->
 		<div
-			class="w-full max-w-xl overflow-hidden rounded-2xl border border-[#CBD5E1] bg-white shadow-2xl animate-in fade-in-0 zoom-in-95 duration-200"
+			class="w-full max-w-xl overflow-hidden rounded-2xl border border-[#d8c7b5] bg-[#fbf8f5] shadow-2xl animate-in fade-in-0 zoom-in-95 duration-200"
 			onclick={(e) => e.stopPropagation()}
 			role="none"
 		>
 			<!-- Input Header -->
-			<div class="relative flex items-center border-b border-[#E5E7EB] px-4 py-3 bg-[#F8F9FA]">
-				<Terminal class="h-4 w-4 text-[#0F172A] shrink-0 mr-3" />
+			<div class="relative flex items-center border-b border-[#e2d5c7] px-4 py-3 bg-[#efe6dd]">
+				<Terminal class="h-4 w-4 text-[#9a0002] shrink-0 mr-3" />
 				<input
 					type="text"
 					bind:value={searchQuery}
 					placeholder="Type a command or filter (skills, projects, copy-email, book-call)..."
-					class="w-full bg-transparent text-sm font-mono text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none"
+					class="w-full bg-transparent text-sm font-mono text-[#231510] placeholder:text-[#7a665e] focus:outline-none"
 				/>
-				<kbd class="hidden sm:inline-block rounded border border-[#CBD5E1] bg-white px-2 py-0.5 text-[10px] font-mono text-[#64748B]">
+				<kbd class="hidden sm:inline-block rounded border border-[#d8c7b5] bg-[#fbf8f5] px-2 py-0.5 text-[10px] font-mono text-[#7a665e]">
 					ESC
 				</kbd>
 			</div>
 
 			<!-- Success Badge feedback if copied -->
 			{#if copiedFeedback}
-				<div class="bg-emerald-50 px-4 py-2 border-b border-emerald-100 flex items-center gap-2 text-xs font-mono text-emerald-800">
-					<Check class="h-4 w-4 text-emerald-600" />
+				<div class="bg-[#efe6dd] px-4 py-2 border-b border-[#9a0002]/30 flex items-center gap-2 text-xs font-mono text-[#9a0002]">
+					<Check class="h-4 w-4 text-[#9a0002]" />
 					<span>Email Copied to Clipboard: {PERSONAL_INFO.email}</span>
 				</div>
 			{/if}
@@ -183,7 +171,7 @@
 			<!-- Command Options List -->
 			<div class="max-h-80 overflow-y-auto p-2">
 				{#if filteredCommands.length === 0}
-					<div class="p-6 text-center text-xs font-mono text-[#64748B]">
+					<div class="p-6 text-center text-xs font-mono text-[#7a665e]">
 						No matching commands found for "{searchQuery}". Try "skills" or "projects".
 					</div>
 				{:else}
@@ -191,18 +179,18 @@
 						<button
 							type="button"
 							onclick={cmd.action}
-							class="group flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-left text-xs font-mono transition-all hover:bg-[#0F172A] hover:text-white cursor-pointer"
+							class="group flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-left text-xs font-mono transition-all hover:bg-[#9a0002] hover:text-[#efe6dd] cursor-pointer"
 						>
 							<div class="flex items-center gap-2.5">
-								<span class="rounded bg-[#F1F5F9] px-2 py-0.5 text-[10px] text-[#475569] group-hover:bg-neutral-800 group-hover:text-neutral-300">
+								<span class="rounded bg-[#efe6dd] px-2 py-0.5 text-[10px] text-[#7a665e] group-hover:bg-[#7a0002] group-hover:text-[#efe6dd]">
 									{cmd.category}
 								</span>
-								<span class="text-[#0F172A] group-hover:text-white font-medium">
+								<span class="text-[#231510] group-hover:text-[#efe6dd] font-medium">
 									{@html cmd.label}
 								</span>
 							</div>
 
-							<div class="flex items-center gap-1 text-[#94A3B8] group-hover:text-neutral-400">
+							<div class="flex items-center gap-1 text-[#7a665e] group-hover:text-[#efe6dd]">
 								<span>{cmd.shortcut}</span>
 							</div>
 						</button>
@@ -211,13 +199,13 @@
 			</div>
 
 			<!-- Palette Footer -->
-			<div class="flex items-center justify-between border-t border-[#E5E7EB] bg-[#F8F9FA] px-4 py-2.5 text-[11px] font-mono text-[#64748B]">
+			<div class="flex items-center justify-between border-t border-[#e2d5c7] bg-[#efe6dd] px-4 py-2.5 text-[11px] font-mono text-[#7a665e]">
 				<div class="flex items-center gap-3">
-					<span>Use <kbd class="rounded bg-white px-1.5 py-0.5 border border-[#CBD5E1]">⌘K</kbd> to toggle</span>
+					<span>Use <kbd class="rounded bg-[#fbf8f5] px-1.5 py-0.5 border border-[#d8c7b5]">⌘K</kbd> to toggle</span>
 					<span>&bull;</span>
 					<span>Bangalore SDE Terminal</span>
 				</div>
-				<span>Aishwarya S</span>
+				<span class="text-[#9a0002] font-semibold">Aishwarya S</span>
 			</div>
 		</div>
 	</div>
