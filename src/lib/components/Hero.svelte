@@ -54,34 +54,30 @@
 	style="--mx: {mx}%; --my: {my}%;"
 >
 	<!-- =========================================================
-		BACKGROUND: soft pearl gradient with gentle colour accents
+		BACKGROUND: Dreamy 2-Spread Gradient System (Global Brand Style)
 	========================================================= -->
 	<div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-		<div class="hero-mesh absolute inset-0"></div>
+		<!-- Base warm pearl canvas -->
+		<div class="dreamy-canvas absolute inset-0"></div>
 
-		<div class="blob blob-a"></div>
-		<div class="blob blob-b"></div>
+		<!-- Spread 1: Primary Ruby/Cherry Dreamy Spread (Behind right profile area) -->
+		<div class="dreamy-spread-primary right-2 sm:right-6 lg:right-10 top-1/2 -translate-y-1/2"></div>
+
+		<!-- Spread 2: Secondary Separated Amber/Peach Dreamy Spread (Anchoring bottom-left) -->
+		<div class="dreamy-spread-secondary left-[-2rem] sm:left-4 bottom-[-3rem] sm:bottom-0"></div>
 
 		<!-- Cursor glow -->
 		<div class="hero-spot absolute inset-0"></div>
 
-		<!-- Very faint grid, fading out at the edges -->
-		<div
-			class="absolute inset-0 opacity-60"
-			style="
-				background-image:
-					linear-gradient(rgba(36,25,22,0.035) 1px, transparent 1px),
-					linear-gradient(90deg, rgba(36,25,22,0.035) 1px, transparent 1px);
-				background-size: 48px 48px;
-				mask-image: radial-gradient(ellipse at 65% 40%, black 5%, transparent 70%);
-				-webkit-mask-image: radial-gradient(ellipse at 65% 40%, black 5%, transparent 70%);
-			"
-		></div>
+		<!-- Faint architectural drafting grid with vignette mask -->
+		<div class="dreamy-grid"></div>
 
-		<div class="hero-grain absolute inset-0"></div>
+		<!-- Tactile Velvety Film Grain -->
+		<div class="dreamy-grain"></div>
 
+		<!-- Bottom soft feather to main page -->
 		<div
-			class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-white/80 to-transparent"
+			class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#fbf9f6]/90 to-transparent"
 		></div>
 	</div>
 
@@ -345,54 +341,9 @@
 </section>
 
 <style>
-	/* ---------- Background: pearl white → soft grey, with faint colour ---------- */
+	/* ---------- Background: Warm Pearl Ivory Canvas ---------- */
 	.hero {
-		background: #f3f1ef;
-	}
-
-	.hero-mesh {
-		background:
-			radial-gradient(55rem 38rem at 85% 5%, rgba(255, 255, 255, 0.95), transparent 62%),
-			radial-gradient(45rem 34rem at 92% 70%, rgba(244, 190, 178, 0.35), transparent 62%),
-			radial-gradient(40rem 32rem at 5% 90%, rgba(214, 222, 236, 0.45), transparent 62%),
-			radial-gradient(36rem 28rem at 30% 0%, rgba(255, 236, 228, 0.6), transparent 60%),
-			linear-gradient(180deg, #efedeb 0%, #f7f6f5 55%, #fbfaf9 100%);
-	}
-
-	.blob {
-		position: absolute;
-		border-radius: 9999px;
-		filter: blur(80px);
-		will-change: transform;
-	}
-	.blob-a {
-		top: -8%;
-		right: 6%;
-		width: 30rem;
-		height: 30rem;
-		background: radial-gradient(circle, rgba(255, 150, 125, 0.5) 0%, transparent 70%);
-		opacity: 0.55;
-		animation: drift-a 24s ease-in-out infinite alternate;
-	}
-	.blob-b {
-		bottom: -14%;
-		left: 22%;
-		width: 28rem;
-		height: 28rem;
-		background: radial-gradient(circle, rgba(154, 0, 2, 0.28) 0%, transparent 70%);
-		opacity: 0.35;
-		animation: drift-b 30s ease-in-out infinite alternate;
-	}
-
-	@keyframes drift-a {
-		to {
-			transform: translate(-8vw, 10vh) scale(1.15);
-		}
-	}
-	@keyframes drift-b {
-		to {
-			transform: translate(10vw, -8vh) scale(1.1);
-		}
+		background: #fbf9f6;
 	}
 
 	/* Cursor glow: pearl-white core with a whisper of cherry */
@@ -400,22 +351,16 @@
 		background:
 			radial-gradient(
 				420px circle at var(--mx) var(--my),
-				rgba(255, 255, 255, 0.85),
+				rgba(255, 255, 255, 0.8),
 				rgba(255, 255, 255, 0) 65%
 			),
 			radial-gradient(
 				640px circle at var(--mx) var(--my),
-				rgba(154, 0, 2, 0.07),
-				rgba(255, 140, 120, 0.04) 45%,
+				rgba(154, 0, 2, 0.06),
+				rgba(255, 140, 120, 0.03) 45%,
 				transparent 72%
 			);
 		transition: background 0.2s ease-out;
-	}
-
-	.hero-grain {
-		opacity: 0.16;
-		mix-blend-mode: multiply;
-		background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.3  0 0 0 0 0.25  0 0 0 0 0.24  0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 	}
 
 	/* ---------- Headline letters ---------- */
@@ -600,7 +545,6 @@
 
 	/* ---------- Accessibility ---------- */
 	@media (prefers-reduced-motion: reduce) {
-		.blob,
 		.letter,
 		:global(.animate-nudge) {
 			animation: none;

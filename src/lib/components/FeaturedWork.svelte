@@ -7,21 +7,32 @@
 	}>();
 </script>
 
-<section id="projects" class="relative py-20 lg:py-28 bg-[#efe6dd] border-b border-[#e2d5c7]">
-	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<section id="projects" class="relative py-20 lg:py-28 bg-[#fbf9f6] border-b border-[#e3dedb] overflow-hidden text-[#241916]">
+	<!-- Background System: 2 Separated Dreamy Gradient Spreads + Grain -->
+	<div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+		<div class="dreamy-canvas absolute inset-0"></div>
+		<!-- Spread 1: Primary Cherry Bloom on top-right -->
+		<div class="dreamy-spread-primary -top-16 -right-16 opacity-45"></div>
+		<!-- Spread 2: Secondary Amber/Peach Bloom on bottom-left -->
+		<div class="dreamy-spread-secondary bottom-10 -left-14 opacity-40"></div>
+		<div class="dreamy-grid"></div>
+		<div class="dreamy-grain"></div>
+	</div>
+
+	<div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		
 		<!-- Section Header -->
-		<div class="mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-[#e2d5c7] pb-6">
+		<div class="mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-[#e3dedb] pb-6">
 			<div>
-				<div class="flex items-center gap-2 text-xs font-mono font-medium uppercase tracking-[0.2em] text-[#7a665e]">
-					<span class="inline-block h-2 w-2 rounded-full bg-[#9a0002]"></span>
+				<div class="flex items-center gap-2 text-[10px] font-mono font-semibold uppercase tracking-[0.22em] text-[#9a0002]">
+					<span class="inline-block h-1.5 w-1.5 rounded-full bg-[#9a0002]"></span>
 					Architectural Case Studies
 				</div>
-				<h2 class="mt-2 text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#231510]">
-					FEATURED WORK (01 — 03)
+				<h2 class="mt-2 text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-[-0.03em] text-[#241916]">
+					Featured Work (01 — 03)
 				</h2>
 			</div>
-			<div class="text-xs font-mono text-[#7a665e]">
+			<div class="text-xs font-mono tracking-wider text-[#897870] uppercase">
 				MISSION-CRITICAL PORTALS &bull; REGTECH &bull; ENERGY
 			</div>
 		</div>
@@ -29,25 +40,25 @@
 		<!-- Case Studies List -->
 		<div class="space-y-8">
 			{#each CASE_STUDIES as study}
-				<div class="group relative rounded-2xl border border-[#e2d5c7] bg-[#fbf8f5] p-7 sm:p-10 shadow-sm transition-all duration-300 hover:border-[#9a0002] hover:shadow-xl">
+				<div class="group relative rounded-2xl card-glass p-7 sm:p-10 shadow-sm transition-all duration-300">
 					
 					<!-- Top Row: Number, Title, Period -->
-					<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#e2d5c7] pb-6">
+					<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#e3dedb] pb-6">
 						<div class="flex items-baseline gap-3">
 							<span class="font-serif text-3xl sm:text-4xl font-bold text-[#9a0002]">
 								{study.number}.
 							</span>
 							<div>
-								<h3 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#231510] group-hover:text-[#9a0002] transition-colors">
+								<h3 class="text-2xl sm:text-3xl font-serif font-bold tracking-tight text-[#241916] group-hover:text-[#9a0002] transition-colors">
 									{study.title}
 								</h3>
-								<div class="text-xs font-mono text-[#7a665e] mt-1">
+								<div class="text-xs font-mono text-[#897870] mt-1 uppercase tracking-wider">
 									{study.subtitle}
 								</div>
 							</div>
 						</div>
 
-						<div class="font-mono text-xs font-semibold tracking-wider text-[#7a665e] bg-[#efe6dd] px-3 py-1 rounded-md self-start sm:self-auto border border-[#e2d5c7]/60">
+						<div class="font-mono text-xs font-semibold tracking-wider text-[#897870] bg-white/80 px-3 py-1 rounded-md self-start sm:self-auto border border-[#e3dedb]">
 							[{study.period}]
 						</div>
 					</div>
@@ -55,25 +66,25 @@
 					<!-- Tags Row -->
 					<div class="mt-6 flex flex-wrap gap-2.5">
 						{#each study.tags as tag}
-							<span class="inline-flex items-center rounded-lg border border-[#e2d5c7] bg-[#efe6dd] px-3 py-1 text-xs font-mono font-medium text-[#231510]">
+							<span class="inline-flex items-center rounded-lg border border-[#e3dedb] bg-white/70 px-3 py-1 text-xs font-mono font-medium text-[#241916]">
 								{tag}
 							</span>
 						{/each}
 					</div>
 
 					<!-- Summary Description -->
-					<p class="mt-6 text-lg sm:text-[19px] text-[#3b271e] leading-relaxed max-w-4xl">
+					<p class="mt-6 text-lg sm:text-[19px] text-[#4b3932] leading-relaxed max-w-4xl font-normal">
 						{study.summary}
 					</p>
 
 					<!-- Bottom Row: Metrics & Architecture Spec Action -->
-					<div class="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 pt-6 border-t border-[#e2d5c7]">
+					<div class="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 pt-6 border-t border-[#e3dedb]">
 						<!-- Key Metrics -->
 						<div class="grid grid-cols-3 gap-4 sm:gap-8">
 							{#each study.metrics as metric}
 								<div>
-									<div class="text-2xl sm:text-3xl font-bold text-[#9a0002]">{metric.value}</div>
-									<div class="text-xs sm:text-sm font-mono text-[#7a665e] mt-0.5">{metric.label}</div>
+									<div class="text-2xl sm:text-3xl font-serif font-bold text-[#9a0002]">{metric.value}</div>
+									<div class="text-xs sm:text-sm font-mono text-[#897870] mt-0.5 uppercase tracking-wider">{metric.label}</div>
 								</div>
 							{/each}
 						</div>
@@ -82,10 +93,10 @@
 						<button
 							type="button"
 							onclick={() => onInspectSpec(study)}
-							class="inline-flex items-center gap-2 rounded-full bg-[#9a0002] px-6 py-3 text-sm font-medium text-[#efe6dd] shadow-sm transition-all hover:bg-[#7a0002] hover:shadow-md active:scale-95 cursor-pointer self-start sm:self-auto shrink-0"
+							class="btn-primary inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-medium text-[#f7f3ee] shadow-sm cursor-pointer self-start sm:self-auto shrink-0"
 						>
-							<span>Inspect Architecture Spec</span>
-							<ArrowUpRight class="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+							<span class="relative z-10">Inspect Architecture Spec</span>
+							<ArrowUpRight class="relative z-10 h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
 						</button>
 					</div>
 

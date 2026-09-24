@@ -29,17 +29,28 @@
 
 <svelte:window onpointerup={handlePointerUp} onpointermove={(e) => isDragging && updateSlider(e)} />
 
-<section id="performance-lab" class="relative py-20 lg:py-28 bg-[#efe6dd] border-b border-[#e2d5c7]">
-	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<section id="performance-lab" class="relative py-20 lg:py-28 bg-[#fbf9f6] border-b border-[#e3dedb] overflow-hidden text-[#241916]">
+	<!-- Background System: 2 Separated Dreamy Gradient Spreads + Grain -->
+	<div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+		<div class="dreamy-canvas absolute inset-0"></div>
+		<!-- Spread 1: Secondary Amber/Peach Bloom on top-left -->
+		<div class="dreamy-spread-secondary -top-12 -left-12 opacity-35"></div>
+		<!-- Spread 2: Primary Cherry Bloom on bottom-right -->
+		<div class="dreamy-spread-primary -bottom-16 -right-16 opacity-40"></div>
+		<div class="dreamy-grid"></div>
+		<div class="dreamy-grain"></div>
+	</div>
+
+	<div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		
 		<!-- Section Header -->
-		<div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 border-b border-[#e2d5c7] pb-6">
+		<div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 border-b border-[#e3dedb] pb-6">
 			<div>
-				<div class="flex items-center gap-2 text-xs font-mono font-medium uppercase tracking-[0.2em] text-[#7a665e]">
-					<span class="inline-block h-2 w-2 rounded-full bg-[#9a0002]"></span>
+				<div class="flex items-center gap-2 text-[10px] font-mono font-semibold uppercase tracking-[0.22em] text-[#9a0002]">
+					<span class="inline-block h-1.5 w-1.5 rounded-full bg-[#9a0002]"></span>
 					Interactive Architecture Lab
 				</div>
-				<h2 class="mt-2 text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#231510]">
+				<h2 class="mt-2 text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-[-0.03em] text-[#241916]">
 					Before / After Modernization
 				</h2>
 			</div>
@@ -48,37 +59,37 @@
 				<button
 					type="button"
 					onclick={() => sliderPosition = 15}
-					class="rounded-full px-3.5 py-1.5 text-xs font-mono border transition-all cursor-pointer {sliderPosition <= 20 ? 'bg-[#9a0002] border-[#9a0002] text-[#efe6dd]' : 'border-[#e2d5c7] bg-[#fbf8f5] text-[#695750] hover:border-[#9a0002] hover:text-[#9a0002]'}"
+					class="rounded-full px-3.5 py-1.5 text-xs font-mono border transition-all cursor-pointer {sliderPosition <= 20 ? 'bg-[#9a0002] border-[#9a0002] text-[#f7f3ee]' : 'border-[#e3dedb] bg-white text-[#4b3932] hover:border-[#9a0002] hover:text-[#9a0002]'}"
 				>
 					Legacy Portal
 				</button>
 				<button
 					type="button"
 					onclick={() => sliderPosition = 50}
-					class="rounded-full px-3.5 py-1.5 text-xs font-mono border transition-all cursor-pointer {sliderPosition > 20 && sliderPosition < 80 ? 'bg-[#9a0002] border-[#9a0002] text-[#efe6dd]' : 'border-[#e2d5c7] bg-[#fbf8f5] text-[#695750] hover:border-[#9a0002] hover:text-[#9a0002]'}"
+					class="rounded-full px-3.5 py-1.5 text-xs font-mono border transition-all cursor-pointer {sliderPosition > 20 && sliderPosition < 80 ? 'bg-[#9a0002] border-[#9a0002] text-[#f7f3ee]' : 'border-[#e3dedb] bg-white text-[#4b3932] hover:border-[#9a0002] hover:text-[#9a0002]'}"
 				>
 					Split (50/50)
 				</button>
 				<button
 					type="button"
 					onclick={() => sliderPosition = 85}
-					class="rounded-full px-3.5 py-1.5 text-xs font-mono border transition-all cursor-pointer {sliderPosition >= 80 ? 'bg-[#9a0002] border-[#9a0002] text-[#efe6dd]' : 'border-[#e2d5c7] bg-[#fbf8f5] text-[#695750] hover:border-[#9a0002] hover:text-[#9a0002]'}"
+					class="rounded-full px-3.5 py-1.5 text-xs font-mono border transition-all cursor-pointer {sliderPosition >= 80 ? 'bg-[#9a0002] border-[#9a0002] text-[#f7f3ee]' : 'border-[#e3dedb] bg-white text-[#4b3932] hover:border-[#9a0002] hover:text-[#9a0002]'}"
 				>
 					Modernized (98/100)
 				</button>
 			</div>
 		</div>
 
-		<p class="text-base sm:text-lg text-[#3b271e] max-w-3xl mb-8 leading-relaxed">
+		<p class="text-base sm:text-lg text-[#4b3932] max-w-3xl mb-8 leading-relaxed font-normal">
 			Drag the interactive slider below to inspect the quantifiable impact of decomposing legacy monolithic Angular portals into reactive, Signal-driven standalone architectures.
 		</p>
 
 		<!-- Sub tabs for view types -->
-		<div class="flex border-b border-[#e2d5c7] mb-6 gap-6 text-sm font-medium">
+		<div class="flex border-b border-[#e3dedb] mb-6 gap-6 text-sm font-medium">
 			<button
 				type="button"
 				onclick={() => activeTab = 'metrics'}
-				class="pb-3 flex items-center gap-2 transition-all cursor-pointer {activeTab === 'metrics' ? 'border-b-2 border-[#9a0002] text-[#9a0002] font-semibold' : 'text-[#695750] hover:text-[#9a0002]'}"
+				class="pb-3 flex items-center gap-2 transition-all cursor-pointer {activeTab === 'metrics' ? 'border-b-2 border-[#9a0002] text-[#9a0002] font-semibold' : 'text-[#897870] hover:text-[#9a0002]'}"
 			>
 				<Gauge class="h-4 w-4" />
 				Core Web Vitals &amp; Audit Score
@@ -86,7 +97,7 @@
 			<button
 				type="button"
 				onclick={() => activeTab = 'code'}
-				class="pb-3 flex items-center gap-2 transition-all cursor-pointer {activeTab === 'code' ? 'border-b-2 border-[#9a0002] text-[#9a0002] font-semibold' : 'text-[#695750] hover:text-[#9a0002]'}"
+				class="pb-3 flex items-center gap-2 transition-all cursor-pointer {activeTab === 'code' ? 'border-b-2 border-[#9a0002] text-[#9a0002] font-semibold' : 'text-[#897870] hover:text-[#9a0002]'}"
 			>
 				<Code class="h-4 w-4" />
 				Code Architecture Diff
@@ -95,7 +106,7 @@
 
 		<!-- Interactive Split Slider Container -->
 		<div
-			class="relative w-full overflow-hidden rounded-2xl border border-[#d8c7b5] bg-[#fbf8f5] shadow-xl select-none cursor-ew-resize min-h-[440px]"
+			class="relative w-full overflow-hidden rounded-2xl border border-[#e3dedb] bg-[#fbf9f6] shadow-xl select-none cursor-ew-resize min-h-[440px]"
 			role="slider"
 			tabindex="0"
 			aria-label="Before and after portal modernization comparison slider"
@@ -109,7 +120,7 @@
 			onpointerdown={handlePointerDown}
 		>
 			<!-- Modernized (Right / Full Background) Layer in Deep Cherry Cola Noir -->
-			<div class="absolute inset-0 bg-[#1a0304] text-[#efe6dd] p-6 sm:p-8 flex flex-col justify-between overflow-y-auto">
+			<div class="absolute inset-0 bg-[#1a0304] text-[#f7f3ee] p-6 sm:p-8 flex flex-col justify-between overflow-y-auto">
 				<div class="flex items-center justify-between">
 					<div class="flex items-center gap-2">
 						<span class="flex h-3 w-3 rounded-full bg-[#ff4a4d] animate-pulse"></span>
@@ -117,7 +128,7 @@
 							Modernized Architecture (Angular 17)
 						</span>
 					</div>
-					<div class="flex items-center gap-2 rounded-full border border-[#9a0002]/60 bg-[#9a0002]/25 px-3 py-1 font-mono text-xs text-[#efe6dd]">
+					<div class="flex items-center gap-2 rounded-full border border-[#9a0002]/60 bg-[#9a0002]/25 px-3 py-1 font-mono text-xs text-[#f7f3ee]">
 						<span>Lighthouse: 98 / 100</span>
 						<CheckCircle class="h-3.5 w-3.5 text-[#ff8082]" />
 					</div>
@@ -127,34 +138,34 @@
 					<div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-6">
 						<div class="rounded-xl border border-[#9a0002]/40 bg-[#2b080b]/90 p-4">
 							<span class="block text-xs font-mono text-[#d6b8b9]">First Contentful Paint</span>
-							<span class="text-3xl font-bold text-[#efe6dd]">0.6s</span>
+							<span class="text-3xl font-bold text-[#f7f3ee]">0.6s</span>
 							<span class="block text-[11px] text-[#ff8082] mt-1">&check; Target &lt; 1.8s (Good)</span>
 						</div>
 						<div class="rounded-xl border border-[#9a0002]/40 bg-[#2b080b]/90 p-4">
 							<span class="block text-xs font-mono text-[#d6b8b9]">Time to Interactive</span>
-							<span class="text-3xl font-bold text-[#efe6dd]">1.1s</span>
+							<span class="text-3xl font-bold text-[#f7f3ee]">1.1s</span>
 							<span class="block text-[11px] text-[#ff8082] mt-1">-78% reduction</span>
 						</div>
 						<div class="rounded-xl border border-[#9a0002]/40 bg-[#2b080b]/90 p-4">
 							<span class="block text-xs font-mono text-[#d6b8b9]">Initial JS Bundle</span>
-							<span class="text-3xl font-bold text-[#efe6dd]">620 KB</span>
+							<span class="text-3xl font-bold text-[#f7f3ee]">620 KB</span>
 							<span class="block text-[11px] text-[#ff8082] mt-1">Route-level code splitting</span>
 						</div>
 						<div class="rounded-xl border border-[#9a0002]/40 bg-[#2b080b]/90 p-4">
 							<span class="block text-xs font-mono text-[#d6b8b9]">Change Detection</span>
-							<span class="text-3xl font-bold text-[#efe6dd]">OnPush</span>
+							<span class="text-3xl font-bold text-[#f7f3ee]">OnPush</span>
 							<span class="block text-[11px] text-[#ff8082] mt-1">Signals + fine-grained</span>
 						</div>
 					</div>
 
 					<div class="rounded-xl border border-[#9a0002]/40 bg-[#26070a]/90 p-4 font-mono text-xs text-[#dac8b7] space-y-1.5">
 						<div class="text-[#ff8082] font-semibold">// Modernized Architecture Highlights:</div>
-						<div>&bull; Standalone Components + Deferred Blocks (<span class="text-[#efe6dd]">@defer</span>)</div>
-						<div>&bull; Immutable RxJS Data Pipelines with <span class="text-[#efe6dd]">takeUntilDestroyed()</span></div>
+						<div>&bull; Standalone Components + Deferred Blocks (<span class="text-[#f7f3ee]">@defer</span>)</div>
+						<div>&bull; Immutable RxJS Data Pipelines with <span class="text-[#f7f3ee]">takeUntilDestroyed()</span></div>
 						<div>&bull; Zero Zone.js CD cycles on high-rate telemetry streams</div>
 					</div>
 				{:else}
-					<div class="my-4 rounded-xl border border-[#9a0002]/40 bg-[#120203] p-4 font-mono text-xs text-[#efe6dd] overflow-x-auto">
+					<div class="my-4 rounded-xl border border-[#9a0002]/40 bg-[#120203] p-4 font-mono text-xs text-[#f7f3ee] overflow-x-auto">
 						<div class="text-[#ff8082] mb-2 font-semibold">// Modern Angular 17 Reactive Architecture</div>
 						<pre class="text-[12px] leading-relaxed"><code>@Component(&#123;
   standalone: true,
@@ -199,36 +210,36 @@ export class ModernTelemetryDashboard &#123;
 
 				{#if activeTab === 'metrics'}
 					<div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-6 min-w-[500px]">
-						<div class="rounded-xl border border-[#e2d5c7] bg-[#efe6dd] p-4">
+						<div class="rounded-xl border border-[#e3dedb] bg-[#f7f3ee] p-4">
 							<span class="block text-xs font-mono text-[#7a665e]">First Contentful Paint</span>
 							<span class="text-3xl font-bold text-[#9a0002]">3.4s</span>
 							<span class="block text-[11px] text-[#7a665e] mt-1">High main-thread lock</span>
 						</div>
-						<div class="rounded-xl border border-[#e2d5c7] bg-[#efe6dd] p-4">
+						<div class="rounded-xl border border-[#e3dedb] bg-[#f7f3ee] p-4">
 							<span class="block text-xs font-mono text-[#7a665e]">Time to Interactive</span>
 							<span class="text-3xl font-bold text-[#9a0002]">5.2s</span>
 							<span class="block text-[11px] text-[#7a665e] mt-1">Sluggish touch response</span>
 						</div>
-						<div class="rounded-xl border border-[#e2d5c7] bg-[#efe6dd] p-4">
+						<div class="rounded-xl border border-[#e3dedb] bg-[#f7f3ee] p-4">
 							<span class="block text-xs font-mono text-[#7a665e]">Initial JS Bundle</span>
 							<span class="text-3xl font-bold text-[#9a0002]">4.8 MB</span>
 							<span class="block text-[11px] text-[#7a665e] mt-1">Monolithic unchunked JS</span>
 						</div>
-						<div class="rounded-xl border border-[#e2d5c7] bg-[#efe6dd] p-4">
+						<div class="rounded-xl border border-[#e3dedb] bg-[#f7f3ee] p-4">
 							<span class="block text-xs font-mono text-[#7a665e]">Change Detection</span>
 							<span class="text-3xl font-bold text-[#9a0002]">Default</span>
 							<span class="block text-[11px] text-[#7a665e] mt-1">Full app tree dirty checking</span>
 						</div>
 					</div>
 
-					<div class="rounded-xl border border-[#9a0002]/20 bg-[#efe6dd] p-4 font-mono text-xs text-[#3b271e] space-y-1.5 min-w-[320px]">
+					<div class="rounded-xl border border-[#9a0002]/20 bg-[#f7f3ee] p-4 font-mono text-xs text-[#3b271e] space-y-1.5 min-w-[320px]">
 						<div class="font-semibold text-[#9a0002]">// Legacy Portal Architectural Bottlenecks:</div>
 						<div>&times; Giant monolithic NgModule loading unused enterprise features</div>
 						<div>&times; Unsubscribed RxJS observables causing heap memory leakage</div>
 						<div>&times; Heavy zone.js recalculations on high-frequency API responses</div>
 					</div>
 				{:else}
-					<div class="my-4 rounded-xl border border-[#e2d5c7] bg-[#efe6dd] p-4 font-mono text-xs text-[#231510] overflow-x-auto min-w-[400px]">
+					<div class="my-4 rounded-xl border border-[#e3dedb] bg-[#f7f3ee] p-4 font-mono text-xs text-[#241916] overflow-x-auto min-w-[400px]">
 						<div class="text-[#9a0002] mb-2 font-semibold">// Legacy Monolithic Code (Spaghetti Subscriptions)</div>
 						<pre class="text-[12px] leading-relaxed"><code>export class LegacyDashboardComponent implements OnInit &#123;
   data: any[] = [];
@@ -245,7 +256,7 @@ export class ModernTelemetryDashboard &#123;
 					</div>
 				{/if}
 
-				<div class="flex items-center justify-between text-[11px] font-mono text-[#7a665e] border-t border-[#e2d5c7] pt-3 min-w-[320px]">
+				<div class="flex items-center justify-between text-[11px] font-mono text-[#897870] border-t border-[#e3dedb] pt-3 min-w-[320px]">
 					<span>STATUS: LEGACY REFACTORED</span>
 					<span>BOTTLENECK REMOVED</span>
 				</div>
@@ -256,8 +267,8 @@ export class ModernTelemetryDashboard &#123;
 				class="absolute top-0 bottom-0 z-30 flex items-center justify-center pointer-events-none"
 				style="left: {sliderPosition}%;"
 			>
-				<div class="w-1 h-full bg-[#efe6dd] shadow-2xl"></div>
-				<div class="absolute flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#efe6dd] bg-[#9a0002] text-[#efe6dd] shadow-2xl pointer-events-auto cursor-ew-resize hover:scale-110 active:scale-95 transition-transform">
+				<div class="w-1 h-full bg-[#f7f3ee] shadow-2xl"></div>
+				<div class="absolute flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#f7f3ee] bg-[#9a0002] text-[#f7f3ee] shadow-2xl pointer-events-auto cursor-ew-resize hover:scale-110 active:scale-95 transition-transform">
 					<SlidersHorizontal class="h-4 w-4" />
 				</div>
 			</div>

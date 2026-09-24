@@ -32,8 +32,19 @@
 	}
 </script>
 
-<section id="contact" class="relative py-20 lg:py-28 bg-[#efe6dd] border-b border-[#e2d5c7]">
-	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<section id="contact" class="relative py-20 lg:py-28 bg-[#fbf9f6] border-b border-[#e3dedb] overflow-hidden">
+	<!-- Atmospheric Dual Gradient Blobs & Drafting Grid Canvas (Hero Master Brand Style) -->
+	<div class="dreamy-canvas">
+		<!-- Spread 1: Primary Ruby/Cherry Bloom in bottom-right -->
+		<div class="dreamy-spread-primary absolute bottom-[-8%] right-[-4%] w-[26rem] h-[26rem] md:w-[32rem] md:h-[32rem]"></div>
+		<!-- Spread 2: Secondary Warm Amber/Peach Bloom in top-left -->
+		<div class="dreamy-spread-secondary absolute top-[-6%] left-[-4%] w-[22rem] h-[22rem] md:w-[28rem] md:h-[28rem]"></div>
+		<!-- Subtle Fine Architectural Grid & Tactile Airbrush Film-Grain -->
+		<div class="dreamy-grid"></div>
+		<div class="dreamy-grain"></div>
+	</div>
+
+	<div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		
 		<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
 			
@@ -44,7 +55,7 @@
 						<span class="inline-block h-2 w-2 rounded-full bg-[#9a0002]"></span>
 						Contact &bull; Direct Reach
 					</div>
-					<h2 class="mt-2 text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#231510]">
+					<h2 class="mt-2 text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#241916]">
 						Let's architect something robust.
 					</h2>
 					<p class="mt-4 text-lg text-[#3b271e] leading-relaxed max-w-lg">
@@ -53,23 +64,23 @@
 
 					<!-- Copy Email & Phone Micro-interaction Cards -->
 					<div class="mt-8 space-y-3 max-w-md">
-						<div class="rounded-2xl border border-[#e2d5c7] bg-[#fbf8f5] p-5 shadow-2xs">
+						<div class="rounded-2xl card-glass p-5">
 							<span class="block text-xs font-mono text-[#7a665e] mb-1.5 uppercase tracking-wider">
 								Direct Email Channel
 							</span>
 							<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-								<span class="font-mono text-base font-semibold text-[#231510]">
+								<span class="font-mono text-base font-semibold text-[#241916]">
 									{PERSONAL_INFO.email}
 								</span>
 
 								<button
 									type="button"
 									onclick={copyEmail}
-									class="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#9a0002] px-4 py-2 text-xs font-medium text-[#efe6dd] hover:bg-[#7a0002] transition-all cursor-pointer self-start sm:self-auto shrink-0 shadow-xs"
+									class="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#9a0002] px-4 py-2 text-xs font-medium text-[#f7f3ee] hover:bg-[#7a0002] transition-all cursor-pointer self-start sm:self-auto shrink-0 shadow-xs active:scale-98"
 								>
 									{#if emailCopied}
-										<Check class="h-3.5 w-3.5 text-[#efe6dd]" />
-										<span class="text-[#efe6dd] font-semibold">[ Copied &check; ]</span>
+										<Check class="h-3.5 w-3.5 text-[#f7f3ee]" />
+										<span class="text-[#f7f3ee] font-semibold">[ Copied &check; ]</span>
 									{:else}
 										<Copy class="h-3.5 w-3.5" />
 										<span>Copy Email</span>
@@ -78,21 +89,21 @@
 							</div>
 						</div>
 
-						<div class="rounded-2xl border border-[#e2d5c7] bg-[#fbf8f5] p-5 shadow-2xs">
+						<div class="rounded-2xl card-glass p-5">
 							<span class="block text-xs font-mono text-[#7a665e] mb-1.5 uppercase tracking-wider">
 								Direct Phone Line
 							</span>
 							<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
 								<a
 									href="tel:{PERSONAL_INFO.phone}"
-									class="font-mono text-base font-semibold text-[#231510] hover:text-[#9a0002] hover:underline"
+									class="font-mono text-base font-semibold text-[#241916] hover:text-[#9a0002] hover:underline"
 								>
 									{PERSONAL_INFO.phoneDisplay}
 								</a>
 
 								<a
 									href="tel:{PERSONAL_INFO.phone}"
-									class="inline-flex items-center justify-center gap-1.5 rounded-full border border-[#e2d5c7] bg-[#efe6dd] px-4 py-2 text-xs font-medium text-[#231510] hover:border-[#9a0002] hover:text-[#9a0002] transition-all self-start sm:self-auto shrink-0"
+									class="inline-flex items-center justify-center gap-1.5 rounded-full border border-[#e3dedb] bg-[#f7f3ee] px-4 py-2 text-xs font-medium text-[#241916] hover:border-[#9a0002] hover:text-[#9a0002] transition-all self-start sm:self-auto shrink-0"
 								>
 									<span>Call Direct</span>
 								</a>
@@ -106,27 +117,27 @@
 							href={PERSONAL_INFO.linkedin}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="inline-flex items-center gap-1.5 text-[#231510] hover:text-[#9a0002] hover:underline"
+							class="inline-flex items-center gap-1.5 text-[#241916] hover:text-[#9a0002] hover:underline"
 						>
 							<span>LinkedIn Profile</span>
 							<ExternalLink class="h-3.5 w-3.5 text-[#9a0002]" />
 						</a>
-						<span class="text-[#d8c7b5]">&bull;</span>
+						<span class="text-[#e3dedb]">&bull;</span>
 						<button
 							type="button"
 							onclick={onOpenBooking}
-							class="inline-flex items-center gap-1.5 text-[#231510] hover:text-[#9a0002] hover:underline cursor-pointer"
+							class="inline-flex items-center gap-1.5 text-[#241916] hover:text-[#9a0002] hover:underline cursor-pointer"
 						>
 							<span>Schedule Architecture Call</span>
 							<ArrowUpRight class="h-3.5 w-3.5 text-[#9a0002]" />
 						</button>
-						<span class="text-[#d8c7b5]">&bull;</span>
+						<span class="text-[#e3dedb]">&bull;</span>
 						<span class="text-[#7a665e]">{PERSONAL_INFO.location}</span>
 					</div>
 				</div>
 
 				<!-- Quick Status Pill -->
-				<div class="mt-10 pt-6 border-t border-[#e2d5c7] flex items-center gap-3 text-xs text-[#7a665e]">
+				<div class="mt-10 pt-6 border-t border-[#e3dedb] flex items-center gap-3 text-xs text-[#7a665e]">
 					<div class="flex h-2.5 w-2.5 rounded-full bg-[#9a0002] animate-pulse"></div>
 					<span>Currently interviewing for Senior / Lead Frontend roles globally</span>
 				</div>
@@ -134,16 +145,16 @@
 
 			<!-- Right Column: Interactive Direct Message Form -->
 			<div class="lg:col-span-6">
-				<div class="rounded-2xl border border-[#e2d5c7] bg-[#fbf8f5] p-7 sm:p-9 shadow-sm">
-					<h3 class="text-xl font-bold text-[#231510]">Send a Direct Inquiry</h3>
+				<div class="rounded-2xl card-glass p-7 sm:p-9">
+					<h3 class="text-xl font-bold text-[#241916]">Send a Direct Inquiry</h3>
 					<p class="text-xs text-[#7a665e] mt-1 mb-6">
 						Responses typically within 24 hours during IST / UTC business hours.
 					</p>
 
 					{#if messageSent}
-						<div class="rounded-xl border border-[#9a0002]/30 bg-[#efe6dd] p-6 text-center space-y-2">
+						<div class="rounded-xl border border-[#9a0002]/30 bg-[#9a0002]/8 p-6 text-center space-y-2">
 							<CheckCircle2 class="mx-auto h-8 w-8 text-[#9a0002]" />
-							<h4 class="text-base font-bold text-[#231510]">Message Delivered</h4>
+							<h4 class="text-base font-bold text-[#241916]">Message Delivered</h4>
 							<p class="text-xs text-[#7a665e]">
 								Thank you, {contactName || 'there'}! Aishwarya has received your note and will reply at {contactEmail}.
 							</p>
@@ -158,7 +169,7 @@
 									bind:value={contactName}
 									required
 									placeholder="e.g. Sarah Chen"
-									class="w-full rounded-xl border border-[#e2d5c7] bg-[#efe6dd] px-3.5 py-2.5 text-sm text-[#231510] focus:border-[#9a0002] focus:outline-none"
+									class="w-full rounded-xl border border-[#e3dedb] bg-white/80 px-3.5 py-2.5 text-sm text-[#241916] placeholder:text-[#9c8980] focus:border-[#9a0002] focus:bg-white focus:outline-none transition-all"
 								/>
 							</div>
 
@@ -170,7 +181,7 @@
 									bind:value={contactEmail}
 									required
 									placeholder="sarah@organization.com"
-									class="w-full rounded-xl border border-[#e2d5c7] bg-[#efe6dd] px-3.5 py-2.5 text-sm text-[#231510] focus:border-[#9a0002] focus:outline-none"
+									class="w-full rounded-xl border border-[#e3dedb] bg-white/80 px-3.5 py-2.5 text-sm text-[#241916] placeholder:text-[#9c8980] focus:border-[#9a0002] focus:bg-white focus:outline-none transition-all"
 								/>
 							</div>
 
@@ -182,13 +193,13 @@
 									required
 									rows="4"
 									placeholder="Tell me about the platform, technical challenges, or role requirements..."
-									class="w-full rounded-xl border border-[#e2d5c7] bg-[#efe6dd] px-3.5 py-2.5 text-sm text-[#231510] focus:border-[#9a0002] focus:outline-none resize-none"
+									class="w-full rounded-xl border border-[#e3dedb] bg-white/80 px-3.5 py-2.5 text-sm text-[#241916] placeholder:text-[#9c8980] focus:border-[#9a0002] focus:bg-white focus:outline-none resize-none transition-all"
 								></textarea>
 							</div>
 
 							<button
 								type="submit"
-								class="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#9a0002] py-3 text-sm font-medium text-[#efe6dd] transition-all hover:bg-[#7a0002] active:scale-98 cursor-pointer shadow-sm"
+								class="btn-primary w-full py-3.5 cursor-pointer"
 							>
 								<span>Transmit Message</span>
 								<Send class="h-3.5 w-3.5" />
@@ -208,11 +219,11 @@
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-[#3d0d10]">
 			<div class="flex items-center gap-3">
-				<span class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#9a0002] font-bold text-[#efe6dd] shadow-sm">
+				<span class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#9a0002] font-bold text-[#f7f3ee] shadow-sm">
 					{PERSONAL_INFO.monogram}
 				</span>
 				<div>
-					<div class="font-bold text-[#efe6dd] text-base">{PERSONAL_INFO.name}</div>
+					<div class="font-bold text-[#f7f3ee] text-base">{PERSONAL_INFO.name}</div>
 					<div class="text-[11px] text-[#bca3a5]">Senior Frontend Engineer &bull; Bangalore, India</div>
 				</div>
 			</div>
@@ -228,7 +239,7 @@
 
 		<div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#8f7577]">
 			<div>
-				&copy; {new Date().getFullYear()} Aishwarya S. Palette: Cream Vanilla (#efe6dd) &bull; Cherry Cola (#9a0002).
+				&copy; {new Date().getFullYear()} Aishwarya S. Palette: Warm Pearl Ivory (#fbf9f6) &bull; Cherry Cola (#9a0002).
 			</div>
 			<div>
 				REF: AIS-ANGULAR-ARCH &bull; ALL RIGHTS RESERVED
