@@ -1,96 +1,104 @@
 <script lang="ts">
-	import { ArrowDownRight, Copy, Check, ExternalLink, ArrowUpRight } from 'lucide-svelte';
+	import { ArrowDownRight, Copy, Check, ExternalLink, BadgeCheck, Plus } from 'lucide-svelte';
 	import { PERSONAL_INFO } from '$lib/data/portfolioData';
 
 	let copied = $state(false);
 
+	// cursor glow (section-level)
+	let mx = $state(50);
+	let my = $state(40);
+
+	// profile card tilt
+	let tilt = $state({ x: 0, y: 0, active: false });
+
+	const firstName = 'Aishwarya'.split('');
+
 	function copyEmail() {
 		navigator.clipboard.writeText(PERSONAL_INFO.email);
 		copied = true;
-
-		setTimeout(() => {
-			copied = false;
-		}, 2600);
+		setTimeout(() => (copied = false), 2600);
 	}
+
+	function onSectionMove(e: PointerEvent) {
+		const r = (e.currentTarget as HTMLElement).getBoundingClientRect();
+		mx = ((e.clientX - r.left) / r.width) * 100;
+		my = ((e.clientY - r.top) / r.height) * 100;
+	}
+
+	function onCardMove(e: PointerEvent) {
+		const r = (e.currentTarget as HTMLElement).getBoundingClientRect();
+		tilt = {
+			x: (e.clientX - r.left) / r.width - 0.5,
+			y: (e.clientY - r.top) / r.height - 0.5,
+			active: true
+		};
+	}
+
+	function onCardLeave() {
+		tilt = { x: 0, y: 0, active: false };
+	}
+
+	const metrics = [
+		{ label: 'Experience', value: PERSONAL_INFO.stats.experience, accent: false },
+		{ label: 'Projects', value: PERSONAL_INFO.stats.users, accent: false },
+		{ label: 'Specialization', value: PERSONAL_INFO.stats.optimization, accent: true },
+		{ label: 'Location', value: 'Bangalore', accent: false }
+	];
 </script>
 
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <section
 	id="hero"
-	class="relative min-h-[calc(100vh-4.5rem)] overflow-hidden border-b border-[#ded6ce] bg-[#f7f3ee] text-[#241916]"
+	onpointermove={onSectionMove}
+	class="hero relative min-h-[calc(100dvh-82px)] overflow-hidden border-b border-[#e3dedb] text-[#241916] lg:h-[calc(100dvh-82px)] lg:max-h-[calc(100dvh-82px)]"
+	style="--mx: {mx}%; --my: {my}%;"
 >
 	<!-- =========================================================
-		BACKGROUND SYSTEM
+		BACKGROUND: soft pearl gradient with gentle colour accents
 	========================================================= -->
+	<div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+		<div class="hero-mesh absolute inset-0"></div>
 
-	<div class="pointer-events-none absolute inset-0 overflow-hidden">
-		<!-- Fine drafting-paper texture -->
+		<div class="blob blob-a"></div>
+		<div class="blob blob-b"></div>
+
+		<!-- Cursor glow -->
+		<div class="hero-spot absolute inset-0"></div>
+
+		<!-- Very faint grid, fading out at the edges -->
 		<div
-			class="absolute inset-0 opacity-[0.32]"
+			class="absolute inset-0 opacity-60"
 			style="
 				background-image:
 					linear-gradient(rgba(36,25,22,0.035) 1px, transparent 1px),
 					linear-gradient(90deg, rgba(36,25,22,0.035) 1px, transparent 1px);
-				background-size: 32px 32px;
+				background-size: 48px 48px;
+				mask-image: radial-gradient(ellipse at 65% 40%, black 5%, transparent 70%);
+				-webkit-mask-image: radial-gradient(ellipse at 65% 40%, black 5%, transparent 70%);
 			"
 		></div>
 
-		<!-- Fine dot field -->
-		<div
-			class="absolute inset-0 opacity-[0.18]"
-			style="
-				background-image: radial-gradient(circle, #9a0002 0.7px, transparent 0.7px);
-				background-size: 18px 18px;
-				mask-image: linear-gradient(to bottom, black, transparent 75%);
-			"
-		></div>
-
-		<!-- Large soft architectural circle -->
-		<div
-			class="absolute -top-[16rem] -right-[18rem] h-[48rem] w-[48rem] rounded-full border border-[#9a0002]/[0.07]"
-		></div>
+		<div class="hero-grain absolute inset-0"></div>
 
 		<div
-			class="absolute -top-[10rem] -right-[12rem] h-[36rem] w-[36rem] rounded-full border border-[#9a0002]/[0.055]"
+			class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-white/80 to-transparent"
 		></div>
-
-		<!-- Soft warm glow -->
-		<div
-			class="absolute top-[10%] right-[10%] h-[28rem] w-[28rem] rounded-full bg-[#9a0002]/[0.025] blur-3xl"
-		></div>
-
-		<!-- Bottom accent -->
-		<div
-			class="absolute -bottom-40 -left-40 h-[32rem] w-[32rem] rounded-full border border-[#241916]/[0.04]"
-		></div>
-
-		<!-- Main horizontal alignment -->
-		<div class="absolute top-[42%] right-0 left-0 border-t border-[#9a0002]/[0.055]"></div>
 	</div>
 
 	<!-- =========================================================
 		MAIN GRID
 	========================================================= -->
-
 	<div
-		class="relative mx-auto flex min-h-[calc(100vh-4.5rem)] w-full max-w-[1440px] flex-col px-5 sm:px-8 lg:px-12 xl:px-16"
+		class="relative mx-auto flex min-h-[calc(100dvh-82px)] w-full max-w-[1440px] flex-col justify-between px-5 sm:px-8 lg:h-[calc(100dvh-82px)] lg:px-12 xl:px-16"
 	>
-		<!-- =====================================================
-			HERO BODY
-		===================================================== -->
-
-		<div class="grid flex-1 grid-cols-1 lg:grid-cols-12">
-			<!-- =================================================
-				LEFT SIDE NAV RAIL
-			================================================= -->
-
+		<div class="grid flex-1 grid-cols-1 items-center py-2 lg:grid-cols-12 lg:py-0">
+			<!-- LEFT RAIL -->
 			<aside
-				class="hidden border-r border-[#ded6ce] lg:col-span-1 lg:flex lg:flex-col lg:items-center lg:justify-between lg:py-10"
+				class="hidden border-r border-[#241916]/[0.08] lg:col-span-1 lg:flex lg:h-full lg:flex-col lg:items-center lg:justify-between lg:py-6 xl:py-8"
 			>
-				<div class="flex flex-col items-center gap-4">
-					<span class="font-mono text-[9px] tracking-[0.2em] text-[#9a0002]"> 01 </span>
-
-					<div class="h-20 w-px bg-[#d4c9c1]"></div>
-
+				<div class="flex flex-col items-center gap-3">
+					<span class="font-mono text-[9px] tracking-[0.2em] text-[#9a0002]">01</span>
+					<div class="h-14 w-px bg-gradient-to-b from-[#9a0002]/60 to-transparent xl:h-18"></div>
 					<span
 						class="font-mono text-[8px] tracking-[0.25em] text-[#897870]"
 						style="writing-mode: vertical-rl;"
@@ -99,89 +107,87 @@
 					</span>
 				</div>
 
-				<div class="flex flex-col items-center gap-3">
-					<div class="h-12 w-px bg-[#d4c9c1]"></div>
-
-					<ArrowDownRight class="h-3.5 w-3.5 text-[#9a0002]" />
+				<div class="flex flex-col items-center gap-2.5">
+					<div class="h-10 w-px bg-gradient-to-b from-transparent to-[#9a0002]/60 xl:h-12"></div>
+					<ArrowDownRight class="animate-nudge h-3.5 w-3.5 text-[#9a0002]" />
 				</div>
 			</aside>
 
-			<!-- =================================================
-				CENTER CONTENT
-			================================================= -->
-
-			<main class="relative flex flex-col justify-center py-12 lg:col-span-7 lg:px-10 xl:px-14">
-				<!-- Small category -->
-
-				<div class="mb-7 flex items-center gap-3">
+			<!-- CENTER CONTENT -->
+			<main
+				class="relative flex flex-col justify-center py-4 lg:col-span-7 lg:px-8 lg:py-2 xl:px-12"
+			>
+				<div class="mb-3 flex items-center gap-3 lg:mb-3.5">
 					<div class="h-px w-8 bg-[#9a0002]"></div>
-
 					<span class="text-[10px] font-semibold tracking-[0.22em] text-[#9a0002] uppercase">
 						Senior Frontend Engineer
 					</span>
 				</div>
 
-				<!-- Main headline -->
-
 				<h1
 					class="font-serif text-[11vw] leading-[0.9] font-medium tracking-[-0.05em] whitespace-nowrap text-[#241916] sm:text-[9.5vw] lg:text-[5.8vw] xl:text-[5.6rem]"
+					aria-label="Aishwarya S."
 				>
-					<span>Aishwarya</span>
-					<span class="text-[#9a0002]">S.</span>
+					<span aria-hidden="true">
+						{#each firstName as ch, i}
+							<span class="letter" style="--i: {i};">{ch}</span>
+						{/each}
+					</span>
+					<span class="letter letter-accent text-[#9a0002]" style="--i: 9;" aria-hidden="true"
+						>S.</span
+					>
 				</h1>
 
-				<!-- Underline -->
+				<div
+					class="mt-4 h-px w-full max-w-2xl bg-gradient-to-r from-[#9a0002]/50 via-[#d8d2ce] to-transparent lg:mt-4.5"
+				></div>
 
-				<div class="mt-8 h-px w-full max-w-2xl bg-[#d4c9c1]"></div>
-
-				<!-- Description -->
-
-				<div class="mt-7 grid max-w-3xl grid-cols-1 gap-7 sm:grid-cols-[110px_1fr]">
+				<div
+					class="mt-3.5 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-[110px_1fr] sm:gap-6 lg:mt-4"
+				>
 					<div
-						class="font-mono text-[9px] leading-relaxed tracking-[0.16em] text-[#897870] uppercase"
+						class="pt-0.5 font-mono text-[9px] leading-relaxed tracking-[0.16em] text-[#897870] uppercase"
 					>
 						Profile
 					</div>
 
 					<p
-						class="max-w-2xl text-[17px] leading-[1.6] tracking-[-0.01em] text-[#4b3932] sm:text-[19px]"
+						class="max-w-2xl text-[17px] leading-[1.55] tracking-[-0.01em] text-[#4b3932] sm:text-[19px]"
 					>
 						Frontend engineer with
-						<span class="font-semibold text-[#9a0002]"> 7+ years of experience </span>
+						<span class="hl font-semibold text-[#9a0002]">7+ years of experience</span>
 						building scalable enterprise web applications across Energy, Banking &amp; RegTech — with
 						a focus on clean interfaces, robust architecture and maintainable systems.
 					</p>
 				</div>
 
-				<!-- =================================================
-					ACTIONS
-				================================================= -->
-
-				<div class="mt-9 flex flex-wrap items-center gap-3">
+				<!-- ACTIONS -->
+				<div class="mt-4 flex flex-wrap items-center gap-3 lg:mt-5">
 					<a
 						href="#projects"
-						class="group inline-flex items-center gap-4 bg-[#9a0002] px-6 py-3.5 text-[13px] font-medium text-[#f7f3ee] transition-all duration-300 hover:bg-[#760002]"
+						class="btn-primary group relative inline-flex items-center gap-4 overflow-hidden bg-[#9a0002] px-6 py-3 text-[13px] font-medium text-[#f7f3ee] shadow-[0_10px_30px_-12px_rgba(154,0,2,0.7)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-14px_rgba(154,0,2,0.8)]"
 					>
-						<span>Explore selected work</span>
-
+						<span class="relative z-10">Explore selected work</span>
 						<ArrowDownRight
-							class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1"
+							class="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1"
 						/>
 					</a>
 
 					<button
 						type="button"
 						onclick={copyEmail}
-						class="group inline-flex cursor-pointer items-center gap-2 border border-[#cfc4bc] bg-[#f7f3ee] px-5 py-3.5 text-[13px] font-medium text-[#4b3932] transition-all duration-300 hover:border-[#9a0002] hover:text-[#9a0002]"
+						class="btn-ghost group relative inline-flex cursor-pointer items-center gap-2 overflow-hidden border border-[#d8d2ce] bg-white/60 px-5 py-3 text-[13px] font-medium text-[#4b3932] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#9a0002] hover:text-[#f7f3ee]"
 					>
 						{#if copied}
-							<Check class="h-4 w-4 text-[#9a0002]" />
-
-							<span class="text-[#9a0002]"> Email copied </span>
+							<Check class="relative z-10 h-4 w-4 text-[#9a0002] group-hover:text-[#f7f3ee]" />
+							<span class="relative z-10 text-[#9a0002] group-hover:text-[#f7f3ee]"
+								>Email copied</span
+							>
 						{:else}
-							<Copy class="h-4 w-4 text-[#75655e] transition-colors group-hover:text-[#9a0002]" />
-
-							<span>Copy email</span>
+							<Copy
+								class="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-8deg]"
+							/>
+							<span class="relative z-10">Copy email</span>
 						{/if}
 					</button>
 
@@ -189,204 +195,418 @@
 						href={PERSONAL_INFO.linkedin}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="group inline-flex items-center gap-2 px-3 py-3.5 text-[13px] font-medium text-[#75655e] transition-colors hover:text-[#9a0002]"
+						class="link-underline group inline-flex items-center gap-2 px-3 py-3 text-[13px] font-medium text-[#75655e] transition-colors hover:text-[#9a0002]"
 					>
-						LinkedIn
-
+						<span>LinkedIn</span>
 						<ExternalLink
 							class="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
 						/>
 					</a>
 				</div>
 
-				<!-- =================================================
-					METRICS
-				================================================= -->
-
-				<div class="mt-11 grid max-w-3xl grid-cols-2 border-t border-[#d4c9c1] pt-5 sm:grid-cols-4">
-					<div class="border-r border-[#d4c9c1] pr-4">
-						<div class="font-mono text-[8px] tracking-[0.18em] text-[#897870] uppercase">
-							Experience
+				<!-- METRICS -->
+				<div class="mt-4 grid max-w-3xl grid-cols-2 gap-y-3 sm:grid-cols-4 lg:mt-5">
+					{#each metrics as m}
+						<div
+							class="metric group relative cursor-default border-l border-[#241916]/10 py-0.5 pr-4 pl-4 first:border-l-0 first:pl-0"
+						>
+							<span class="metric-bar"></span>
+							<div class="font-mono text-[8px] tracking-[0.18em] text-[#897870] uppercase">
+								{m.label}
+							</div>
+							<div
+								class="mt-1 text-[17px] font-semibold transition-transform duration-300 group-hover:translate-x-1 {m.accent
+									? 'text-[#9a0002]'
+									: 'text-[#241916]'}"
+							>
+								{m.value}
+							</div>
 						</div>
-
-						<div class="mt-1.5 text-[17px] font-semibold text-[#241916]">
-							{PERSONAL_INFO.stats.experience}
-						</div>
-					</div>
-
-					<div class="border-r border-[#d4c9c1] px-4">
-						<div class="font-mono text-[8px] tracking-[0.18em] text-[#897870] uppercase">
-							Projects
-						</div>
-
-						<div class="mt-1.5 text-[17px] font-semibold text-[#241916]">
-							{PERSONAL_INFO.stats.users}
-						</div>
-					</div>
-
-					<div class="border-r border-[#d4c9c1] px-4">
-						<div class="font-mono text-[8px] tracking-[0.18em] text-[#897870] uppercase">
-							Specialization
-						</div>
-
-						<div class="mt-1.5 text-[17px] font-semibold text-[#9a0002]">
-							{PERSONAL_INFO.stats.optimization}
-						</div>
-					</div>
-
-					<div class="pl-4">
-						<div class="font-mono text-[8px] tracking-[0.18em] text-[#897870] uppercase">
-							Location
-						</div>
-
-						<div class="mt-1.5 text-[17px] font-semibold text-[#241916]">Bangalore</div>
-					</div>
+					{/each}
 				</div>
 			</main>
 
-			<!-- =================================================
-				RIGHT PORTRAIT COLUMN
-			================================================= -->
-
+			<!-- RIGHT: PROFILE CARD -->
 			<section
-				class="relative flex items-center border-l-0 border-[#ded6ce] py-10 lg:col-span-4 lg:border-l lg:pl-10"
+				class="relative flex items-center justify-center py-4 lg:col-span-4 lg:border-l lg:border-[#241916]/[0.08] lg:py-2 lg:pl-6 xl:pl-10"
 			>
-				<div class="relative mx-auto w-full max-w-[390px] lg:mx-0">
-					<!-- Technical coordinates -->
-
+				<div
+					class="relative mx-auto w-full max-w-[290px] sm:max-w-[310px] lg:mx-0 lg:max-w-[300px] xl:max-w-[330px]"
+				>
+					<!-- svelte-ignore a11y_no_static_element_interactions -->
 					<div
-						class="absolute -top-7 left-0 flex w-full justify-between font-mono text-[8px] tracking-[0.15em] text-[#897870]"
+						class="profile-card group relative"
+						onpointermove={onCardMove}
+						onpointerleave={onCardLeave}
+						style="transform: perspective(1000px) rotateY({tilt.x * 8}deg) rotateX({tilt.y *
+							-8}deg) translateY({tilt.active ? -5 : 0}px); --gx: {(tilt.x + 0.5) *
+							100}%; --gy: {(tilt.y + 0.5) * 100}%;"
 					>
-						<span>12°58' N</span>
-						<span>77°35' E</span>
-					</div>
+						<!-- Ambient Glow Behind Card -->
+						<div
+							class="pointer-events-none absolute -inset-1.5 rounded-[2.2rem] bg-gradient-to-tr from-[#9a0002]/20 via-[#ff8a6b]/10 to-transparent opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100"
+						></div>
 
-					<!-- Big background number -->
-
-					<div
-						class="pointer-events-none absolute -top-20 -right-3 font-serif text-[13rem] leading-none tracking-[-0.08em] text-[#9a0002]/[0.065] select-none sm:text-[15rem]"
-					>
-						07
-					</div>
-
-					<!-- Image frame -->
-
-					<div class="relative">
-						<!-- Offset cherry frame -->
-
-						<div class="absolute -bottom-3 -left-3 h-full w-full border border-[#9a0002]/30"></div>
-
-						<div class="relative z-10 overflow-hidden border border-[#cfc4bc] bg-[#ebe4dc] p-2">
-							<div class="group relative aspect-[4/5] overflow-hidden bg-[#d8cec5]">
+						<!-- Card Shell -->
+						<div
+							class="card-shell relative z-10 rounded-[1.9rem] p-[6px] transition-all duration-300 xl:rounded-[2.2rem]"
+						>
+							<!-- Photo: Generously increased visible height -->
+							<div
+								class="relative h-[270px] overflow-hidden rounded-[1.5rem] bg-[#e9e3de] sm:h-[295px] lg:h-[280px] xl:h-[310px] xl:rounded-[1.8rem]"
+							>
 								<img
 									src="/aishwarya-portrait.jpg"
 									alt="Aishwarya S — Senior Frontend Engineer"
-									class="h-full w-full object-cover object-top contrast-[1.04] grayscale transition-all duration-700 ease-out group-hover:scale-[1.025] group-hover:grayscale-[0.15]"
+									class="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.05]"
 									loading="eager"
 								/>
 
-								<!-- subtle cherry wash -->
+								<!-- Technical Viewfinder Hairline Overlay -->
 
+								<!-- Soft light wash -->
 								<div
-									class="pointer-events-none absolute inset-0 bg-[#9a0002]/[0.045] mix-blend-multiply"
+									class="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-[#9a0002]/15"
 								></div>
 
-								<!-- corner markers -->
+								<!-- Sheen that follows the cursor -->
+								<div class="card-sheen pointer-events-none absolute inset-0"></div>
+							</div>
 
-								<div class="absolute top-4 left-4 h-5 w-5 border-t border-l border-white/60"></div>
-
-								<div class="absolute top-4 right-4 h-5 w-5 border-t border-r border-white/60"></div>
-
-								<div
-									class="absolute bottom-4 left-4 h-5 w-5 border-b border-l border-white/60"
-								></div>
-
-								<div
-									class="absolute right-4 bottom-4 h-5 w-5 border-r border-b border-white/60"
-								></div>
-
-								<!-- Bottom image information -->
-
-								<div
-									class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#241916]/75 to-transparent px-5 pt-20 pb-5"
-								>
-									<div class="flex items-end justify-between">
-										<div>
-											<div
-												class="mb-1 flex items-center gap-2 font-mono text-[9px] tracking-[0.15em] text-[#f7f3ee]/70 uppercase"
+							<!-- Info Plate -->
+							<div class="px-3.5 pt-3 pb-3 sm:px-4 sm:pt-3.5 sm:pb-3.5">
+								<div class="flex items-center justify-between gap-2">
+									<!-- Identity & Role -->
+									<div class="min-w-0">
+										<div class="flex items-center gap-1.5">
+											<h2
+												class="font-serif text-[24px] leading-none font-medium tracking-[-0.03em] text-[#241916] sm:text-[26px]"
 											>
-												<span class="h-1.5 w-1.5 rounded-full bg-[#9a0002]"></span>
-												Profile
-											</div>
-
-											<div class="text-[15px] font-medium tracking-[-0.01em] text-[#f7f3ee]">
-												Senior Frontend Engineer
-											</div>
+												Aishwarya S
+											</h2>
+											<BadgeCheck class="verified h-5 w-5 shrink-0 fill-[#9a0002] text-white" />
 										</div>
-
-										<div class="font-mono text-[9px] tracking-wider text-[#f7f3ee]/70">AS / 01</div>
 									</div>
+
+									<!-- Connect CTA -->
+									<a
+										href={PERSONAL_INFO.linkedin}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="follow group/btn relative inline-flex shrink-0 items-center gap-1 overflow-hidden rounded-full border border-[#e6e1dd] bg-[#f2efec] px-3.5 py-1.5 text-[12px] font-medium text-[#241916] shadow-sm transition-all duration-300 hover:border-transparent hover:text-white hover:shadow-[0_8px_20px_-8px_rgba(154,0,2,0.7)]"
+									>
+										<span class="relative z-10">Connect</span>
+										<Plus
+											class="relative z-10 h-3 w-3 transition-transform duration-300 group-hover/btn:rotate-90"
+										/>
+									</a>
 								</div>
 							</div>
-
-							<!-- Image metadata strip -->
-
-							<div
-								class="flex items-center justify-between px-2 py-3 font-mono text-[8px] tracking-[0.14em] text-[#75655e] uppercase"
-							>
-								<span>Angular 17</span>
-
-								<span class="text-[#9a0002]">•</span>
-
-								<span>Liferay DXP</span>
-
-								<span class="text-[#9a0002]">•</span>
-
-								<span>Enterprise</span>
-							</div>
-						</div>
-					</div>
-
-					<!-- =================================================
-						FLOATING INFO
-					================================================= -->
-
-					<div
-						class="absolute top-[22%] -left-7 z-20 hidden border border-[#d4c9c1] bg-[#f7f3ee] px-4 py-3 shadow-[0_8px_30px_rgba(36,25,22,0.05)] sm:block"
-					>
-						<div class="font-mono text-[8px] tracking-[0.18em] text-[#897870] uppercase">
-							Experience
 						</div>
 
-						<div class="mt-1 font-serif text-[27px] leading-none text-[#9a0002]">7+</div>
-
-						<div class="mt-1 text-[8px] tracking-wider text-[#897870] uppercase">Years</div>
+						<!-- Metadata below the card -->
+						<div
+							class="mt-2.5 flex items-center justify-between px-3 font-mono text-[8px] tracking-[0.14em] text-[#75655e] uppercase"
+						>
+							<span class="chip">Angular 17</span>
+							<span class="text-[#9a0002]">•</span>
+							<span class="chip">Liferay DXP</span>
+							<span class="text-[#9a0002]">•</span>
+							<span class="chip">Enterprise</span>
+						</div>
 					</div>
 				</div>
 			</section>
 		</div>
 
-		<!-- =====================================================
-			BOTTOM STATUS BAR
-		===================================================== -->
-
+		<!-- BOTTOM STATUS BAR -->
 		<footer
-			class="flex min-h-[48px] items-center justify-between border-t border-[#ded6ce] font-mono text-[8px] tracking-[0.16em] text-[#897870] uppercase"
+			class="flex h-10 shrink-0 items-center justify-between border-t border-[#241916]/[0.08] font-mono text-[8px] tracking-[0.16em] text-[#897870] uppercase sm:h-11"
 		>
 			<div class="hidden sm:block">
 				<span class="text-[#9a0002]">01</span>
 				&nbsp;&nbsp; Introduction
 			</div>
 
-			<div class="flex items-center gap-3">
+			<a
+				href="#projects"
+				class="group flex items-center gap-3 transition-colors hover:text-[#9a0002]"
+			>
 				<span>Scroll to explore</span>
-
-				<span class="h-px w-8 bg-[#9a0002]"></span>
-
-				<ArrowDownRight class="h-3 w-3 text-[#9a0002]" />
-			</div>
+				<span class="h-px w-8 bg-[#9a0002] transition-all duration-500 group-hover:w-14"></span>
+				<ArrowDownRight
+					class="h-3 w-3 text-[#9a0002] transition-transform duration-300 group-hover:translate-y-0.5"
+				/>
+			</a>
 
 			<div class="hidden sm:block">Selected work / Experience / Contact</div>
 		</footer>
 	</div>
 </section>
+
+<style>
+	/* ---------- Background: pearl white → soft grey, with faint colour ---------- */
+	.hero {
+		background: #f3f1ef;
+	}
+
+	.hero-mesh {
+		background:
+			radial-gradient(55rem 38rem at 85% 5%, rgba(255, 255, 255, 0.95), transparent 62%),
+			radial-gradient(45rem 34rem at 92% 70%, rgba(244, 190, 178, 0.35), transparent 62%),
+			radial-gradient(40rem 32rem at 5% 90%, rgba(214, 222, 236, 0.45), transparent 62%),
+			radial-gradient(36rem 28rem at 30% 0%, rgba(255, 236, 228, 0.6), transparent 60%),
+			linear-gradient(180deg, #efedeb 0%, #f7f6f5 55%, #fbfaf9 100%);
+	}
+
+	.blob {
+		position: absolute;
+		border-radius: 9999px;
+		filter: blur(80px);
+		will-change: transform;
+	}
+	.blob-a {
+		top: -8%;
+		right: 6%;
+		width: 30rem;
+		height: 30rem;
+		background: radial-gradient(circle, rgba(255, 150, 125, 0.5) 0%, transparent 70%);
+		opacity: 0.55;
+		animation: drift-a 24s ease-in-out infinite alternate;
+	}
+	.blob-b {
+		bottom: -14%;
+		left: 22%;
+		width: 28rem;
+		height: 28rem;
+		background: radial-gradient(circle, rgba(154, 0, 2, 0.28) 0%, transparent 70%);
+		opacity: 0.35;
+		animation: drift-b 30s ease-in-out infinite alternate;
+	}
+
+	@keyframes drift-a {
+		to {
+			transform: translate(-8vw, 10vh) scale(1.15);
+		}
+	}
+	@keyframes drift-b {
+		to {
+			transform: translate(10vw, -8vh) scale(1.1);
+		}
+	}
+
+	/* Cursor glow: pearl-white core with a whisper of cherry */
+	.hero-spot {
+		background:
+			radial-gradient(
+				420px circle at var(--mx) var(--my),
+				rgba(255, 255, 255, 0.85),
+				rgba(255, 255, 255, 0) 65%
+			),
+			radial-gradient(
+				640px circle at var(--mx) var(--my),
+				rgba(154, 0, 2, 0.07),
+				rgba(255, 140, 120, 0.04) 45%,
+				transparent 72%
+			);
+		transition: background 0.2s ease-out;
+	}
+
+	.hero-grain {
+		opacity: 0.16;
+		mix-blend-mode: multiply;
+		background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.3  0 0 0 0 0.25  0 0 0 0 0.24  0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+	}
+
+	/* ---------- Headline letters ---------- */
+	.letter {
+		display: inline-block;
+		transition:
+			transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+			color 0.3s ease;
+		animation: letter-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+		animation-delay: calc(var(--i) * 45ms);
+	}
+	.letter:hover {
+		transform: translateY(-0.12em) rotate(-4deg) scale(1.06);
+		color: #9a0002;
+	}
+	.letter-accent:hover {
+		color: #241916;
+	}
+	@keyframes letter-in {
+		from {
+			opacity: 0;
+			transform: translateY(0.35em);
+		}
+	}
+
+	/* ---------- Highlighted phrase ---------- */
+	.hl {
+		background: linear-gradient(90deg, rgba(154, 0, 2, 0.14), rgba(255, 138, 107, 0.26)) no-repeat 0
+			92% / 100% 0.3em;
+		transition: background-size 0.4s ease;
+	}
+	.hl:hover {
+		background-size: 100% 100%;
+	}
+
+	/* ---------- Buttons ---------- */
+	.btn-primary::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(110deg, #760002 0%, #c4304a 55%, #ff8a6b 100%);
+		transform: translateX(-101%);
+		transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	.btn-primary:hover::before {
+		transform: translateX(0);
+	}
+	.btn-primary::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -60%;
+		width: 40%;
+		height: 100%;
+		background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+		transform: skewX(-20deg);
+	}
+	.btn-primary:hover::after {
+		left: 130%;
+		transition: left 0.8s ease;
+	}
+
+	.btn-ghost::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: #9a0002;
+		transform: scaleY(0);
+		transform-origin: bottom;
+		transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	.btn-ghost:hover::before {
+		transform: scaleY(1);
+	}
+
+	.link-underline span {
+		background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0 1px;
+		transition: background-size 0.35s ease;
+		padding-bottom: 2px;
+	}
+	.link-underline:hover span {
+		background-size: 100% 1px;
+	}
+
+	/* ---------- Metrics ---------- */
+	.metric-bar {
+		position: absolute;
+		left: 0;
+		top: -1px;
+		height: 2px;
+		width: 0;
+		background: linear-gradient(90deg, #9a0002, #ff8a6b);
+		transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	.metric:hover .metric-bar {
+		width: 100%;
+	}
+
+	/* ---------- Profile card ---------- */
+	.profile-card {
+		transform-style: preserve-3d;
+		transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.card-shell {
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(250, 249, 248, 0.88));
+		border: 1px solid rgba(255, 255, 255, 0.9);
+		box-shadow:
+			0 0 0 1px rgba(36, 25, 22, 0.06),
+			0 1px 2px rgba(36, 25, 22, 0.04),
+			0 24px 50px -24px rgba(36, 25, 22, 0.28),
+			0 40px 80px -40px rgba(154, 0, 2, 0.22);
+		backdrop-filter: blur(14px);
+		-webkit-backdrop-filter: blur(14px);
+		transition: box-shadow 0.4s ease;
+	}
+	.profile-card:hover .card-shell {
+		box-shadow:
+			0 0 0 1px rgba(154, 0, 2, 0.14),
+			0 1px 2px rgba(36, 25, 22, 0.04),
+			0 30px 60px -24px rgba(36, 25, 22, 0.3),
+			0 50px 90px -36px rgba(154, 0, 2, 0.35);
+	}
+
+	.card-sheen {
+		background: radial-gradient(
+			260px circle at var(--gx, 50%) var(--gy, 50%),
+			rgba(255, 255, 255, 0.4),
+			transparent 60%
+		);
+		opacity: 0;
+		transition: opacity 0.4s ease;
+	}
+	.profile-card:hover .card-sheen {
+		opacity: 1;
+	}
+
+	:global(.verified) {
+		transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+	.profile-card:hover :global(.verified) {
+		transform: rotate(360deg) scale(1.1);
+	}
+
+	.follow::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(110deg, #9a0002 0%, #c4304a 60%, #ff8a6b 100%);
+		opacity: 0;
+		transform: scale(0.6);
+		border-radius: 9999px;
+		transition:
+			opacity 0.3s ease,
+			transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	.follow:hover::before {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	.chip {
+		transition:
+			color 0.25s ease,
+			letter-spacing 0.3s ease;
+		cursor: default;
+	}
+	.chip:hover {
+		color: #9a0002;
+		letter-spacing: 0.2em;
+	}
+
+	/* ---------- Scroll nudge ---------- */
+	:global(.animate-nudge) {
+		animation: nudge 2s ease-in-out infinite;
+	}
+	@keyframes nudge {
+		50% {
+			transform: translate(3px, 3px);
+		}
+	}
+
+	/* ---------- Accessibility ---------- */
+	@media (prefers-reduced-motion: reduce) {
+		.blob,
+		.letter,
+		:global(.animate-nudge) {
+			animation: none;
+		}
+		.profile-card {
+			transform: none !important;
+		}
+	}
+</style>
