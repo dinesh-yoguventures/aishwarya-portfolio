@@ -7,16 +7,13 @@
 	}>();
 </script>
 
-<section id="projects" class="relative py-20 lg:py-28 bg-[#fbf9f6] border-b border-[#e3dedb] overflow-hidden text-[#241916]">
-	<!-- Background System: 2 Separated Dreamy Gradient Spreads + Grain -->
-	<div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-		<div class="dreamy-canvas absolute inset-0"></div>
+<section id="projects" class="relative py-20 lg:py-28 bg-transparent text-[#241916]">
+	<!-- Background Accents: 2 Separated Dreamy Gradient Spreads (Seamless Flow) -->
+	<div class="pointer-events-none absolute inset-0" aria-hidden="true">
 		<!-- Spread 1: Primary Cherry Bloom on top-right -->
 		<div class="dreamy-spread-primary -top-16 -right-16 opacity-45"></div>
 		<!-- Spread 2: Secondary Amber/Peach Bloom on bottom-left -->
 		<div class="dreamy-spread-secondary bottom-10 -left-14 opacity-40"></div>
-		<div class="dreamy-grid"></div>
-		<div class="dreamy-grain"></div>
 	</div>
 
 	<div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

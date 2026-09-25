@@ -50,16 +50,13 @@
 <section
 	id="hero"
 	onpointermove={onSectionMove}
-	class="hero relative min-h-[calc(100dvh-82px)] overflow-hidden border-b border-[#e3dedb] text-[#241916] lg:h-[calc(100dvh-82px)] lg:max-h-[calc(100dvh-82px)]"
+	class="hero relative min-h-[calc(100dvh-82px)] text-[#241916] lg:h-[calc(100dvh-82px)] lg:max-h-[calc(100dvh-82px)]"
 	style="--mx: {mx}%; --my: {my}%;"
 >
 	<!-- =========================================================
-		BACKGROUND: Dreamy 2-Spread Gradient System (Global Brand Style)
+		BACKGROUND: Dreamy 2-Spread Gradient System (Seamless Flow)
 	========================================================= -->
-	<div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-		<!-- Base warm pearl canvas -->
-		<div class="dreamy-canvas absolute inset-0"></div>
-
+	<div class="pointer-events-none absolute inset-0" aria-hidden="true">
 		<!-- Spread 1: Primary Ruby/Cherry Dreamy Spread (Behind right profile area) -->
 		<div class="dreamy-spread-primary right-2 sm:right-6 lg:right-10 top-1/2 -translate-y-1/2"></div>
 
@@ -68,17 +65,6 @@
 
 		<!-- Cursor glow -->
 		<div class="hero-spot absolute inset-0"></div>
-
-		<!-- Faint architectural drafting grid with vignette mask -->
-		<div class="dreamy-grid"></div>
-
-		<!-- Tactile Velvety Film Grain -->
-		<div class="dreamy-grain"></div>
-
-		<!-- Bottom soft feather to main page -->
-		<div
-			class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#fbf9f6]/90 to-transparent"
-		></div>
 	</div>
 
 	<!-- =========================================================
@@ -341,23 +327,23 @@
 </section>
 
 <style>
-	/* ---------- Background: Warm Pearl Ivory Canvas ---------- */
+	/* ---------- Background: Transparent to seamlessly let global atmospheric canvas flow through ---------- */
 	.hero {
-		background: #fbf9f6;
+		background: transparent;
 	}
 
-	/* Cursor glow: pearl-white core with a whisper of cherry */
+	/* Cursor glow: subtle ambient whisper of cherry & warm ivory */
 	.hero-spot {
 		background:
 			radial-gradient(
 				420px circle at var(--mx) var(--my),
-				rgba(255, 255, 255, 0.8),
+				rgba(255, 255, 255, 0.22),
 				rgba(255, 255, 255, 0) 65%
 			),
 			radial-gradient(
 				640px circle at var(--mx) var(--my),
-				rgba(154, 0, 2, 0.06),
-				rgba(255, 140, 120, 0.03) 45%,
+				rgba(154, 0, 2, 0.04),
+				rgba(255, 140, 120, 0.02) 45%,
 				transparent 72%
 			);
 		transition: background 0.2s ease-out;

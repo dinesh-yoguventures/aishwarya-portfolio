@@ -40,30 +40,40 @@
 	}
 </script>
 
-<div class="min-h-screen bg-[#fbf9f6] text-[#241916] selection:bg-[#9a0002] selection:text-[#fbf9f6]">
+<div class="relative min-h-screen bg-[#fbf9f6] text-[#241916] selection:bg-[#9a0002] selection:text-[#fbf9f6] overflow-x-hidden">
+	<!-- Global Continuous Atmospheric Canvas (Seamless across entire application) -->
+	<div class="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
+		<!-- Base warm pearl canvas -->
+		<div class="dreamy-canvas absolute inset-0"></div>
+		<!-- Continuous Architectural Drafting Grid -->
+		<div class="dreamy-grid"></div>
+		<!-- Continuous Velvety Film Grain -->
+		<div class="dreamy-grain"></div>
+	</div>
+
 	<!-- Top Navigation Bar -->
 	<Navbar
 		onOpenBooking={openBooking}
 		onOpenCommandPalette={openCommandPalette}
 	/>
 
-	<main>
+	<main class="relative z-10">
 		<!-- 1. Hero Section: Asymmetrical Split Layout -->
 		<Hero />
 
 		<!-- 2. "About Me" & Competencies: Bento-Grid Layout -->
 		<BentoAbout />
 
-		<!-- 4. Interactive "Before/After" Modernization Slider Component -->
+		<!-- 3. Interactive "Before/After" Modernization Slider Component -->
 		<PerformanceSlider />
 
-		<!-- 3. Featured Architectural Case Studies Section (01 — 03) -->
+		<!-- 4. Featured Architectural Case Studies Section (01 — 03) -->
 		<FeaturedWork onInspectSpec={inspectSpec} />
 
-		<!-- 4. Interactive Experience Timeline (Chronological ⟷ Impact View) -->
+		<!-- 5. Interactive Experience Timeline (Chronological ⟷ Impact View) -->
 		<ExperienceTimeline />
 
-		<!-- 5. Contact Section & Editorial Footer -->
+		<!-- 6. Contact Section & Editorial Footer -->
 		<ContactFooter onOpenBooking={openBooking} />
 	</main>
 

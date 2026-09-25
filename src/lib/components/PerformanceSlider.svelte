@@ -29,16 +29,13 @@
 
 <svelte:window onpointerup={handlePointerUp} onpointermove={(e) => isDragging && updateSlider(e)} />
 
-<section id="performance-lab" class="relative py-20 lg:py-28 bg-[#fbf9f6] border-b border-[#e3dedb] overflow-hidden text-[#241916]">
-	<!-- Background System: 2 Separated Dreamy Gradient Spreads + Grain -->
-	<div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-		<div class="dreamy-canvas absolute inset-0"></div>
+<section id="performance-lab" class="relative py-20 lg:py-28 bg-transparent text-[#241916]">
+	<!-- Background Accents: 2 Separated Dreamy Gradient Spreads (Seamless Flow) -->
+	<div class="pointer-events-none absolute inset-0" aria-hidden="true">
 		<!-- Spread 1: Secondary Amber/Peach Bloom on top-left -->
 		<div class="dreamy-spread-secondary -top-12 -left-12 opacity-35"></div>
 		<!-- Spread 2: Primary Cherry Bloom on bottom-right -->
 		<div class="dreamy-spread-primary -bottom-16 -right-16 opacity-40"></div>
-		<div class="dreamy-grid"></div>
-		<div class="dreamy-grain"></div>
 	</div>
 
 	<div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

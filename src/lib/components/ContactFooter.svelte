@@ -32,16 +32,13 @@
 	}
 </script>
 
-<section id="contact" class="relative py-20 lg:py-28 bg-[#fbf9f6] border-b border-[#e3dedb] overflow-hidden">
-	<!-- Atmospheric Dual Gradient Blobs & Drafting Grid Canvas (Hero Master Brand Style) -->
-	<div class="dreamy-canvas">
+<section id="contact" class="relative py-20 lg:py-28 bg-transparent">
+	<!-- Background Accents: 2 Separated Dreamy Gradient Spreads (Seamless Flow) -->
+	<div class="pointer-events-none absolute inset-0" aria-hidden="true">
 		<!-- Spread 1: Primary Ruby/Cherry Bloom in bottom-right -->
 		<div class="dreamy-spread-primary absolute bottom-[-8%] right-[-4%] w-[26rem] h-[26rem] md:w-[32rem] md:h-[32rem]"></div>
 		<!-- Spread 2: Secondary Warm Amber/Peach Bloom in top-left -->
 		<div class="dreamy-spread-secondary absolute top-[-6%] left-[-4%] w-[22rem] h-[22rem] md:w-[28rem] md:h-[28rem]"></div>
-		<!-- Subtle Fine Architectural Grid & Tactile Airbrush Film-Grain -->
-		<div class="dreamy-grid"></div>
-		<div class="dreamy-grain"></div>
 	</div>
 
 	<div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -214,30 +211,33 @@
 	</div>
 </section>
 
-<!-- Footer in Deep Cherry Cola Noir -->
-<footer class="bg-[#1a0304] text-[#dac8b7] py-12 text-xs font-mono border-t border-[#9a0002]/30">
+<!-- Editorial Footer in Warm Pearl Ivory & Cherry Cola (Brand Matching) -->
+<footer class="relative border-t border-[#241916]/[0.08] bg-[#fbf9f6]/90 backdrop-blur-md text-[#241916] py-12 sm:py-16 text-xs font-mono">
+	<!-- Top Hairline Accent in Cherry Cola -->
+	<div class="pointer-events-none absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#9a0002]/30 to-transparent"></div>
+
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-		<div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-[#3d0d10]">
-			<div class="flex items-center gap-3">
-				<span class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#9a0002] font-bold text-[#f7f3ee] shadow-sm">
+		<div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-[#241916]/[0.08]">
+			<div class="flex items-center gap-3.5">
+				<span class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#9a0002] font-serif font-bold text-[#fbf9f6] shadow-xs">
 					{PERSONAL_INFO.monogram}
 				</span>
 				<div>
-					<div class="font-bold text-[#f7f3ee] text-base">{PERSONAL_INFO.name}</div>
-					<div class="text-[11px] text-[#bca3a5]">Senior Frontend Engineer &bull; Bangalore, India</div>
+					<div class="font-serif font-bold text-[#241916] text-lg tracking-tight">{PERSONAL_INFO.name}</div>
+					<div class="text-[11px] font-mono text-[#7a665e]">Senior Frontend Engineer &bull; Bangalore, India</div>
 				</div>
 			</div>
 
-			<div class="flex items-center gap-6 text-[13px]">
-				<a href="#hero" class="hover:text-[#ff8082] transition-colors">Top &uarr;</a>
-				<a href="#about" class="hover:text-[#ff8082] transition-colors">About</a>
-				<a href="#projects" class="hover:text-[#ff8082] transition-colors">Projects</a>
-				<a href="#performance-lab" class="hover:text-[#ff8082] transition-colors">Lab</a>
-				<a href={PERSONAL_INFO.linkedin} target="_blank" rel="noopener noreferrer" class="hover:text-[#ff8082] transition-colors">LinkedIn</a>
+			<div class="flex flex-wrap items-center gap-6 font-serif text-[15px] text-[#5c4a43]">
+				<a href="#hero" class="hover:text-[#9a0002] transition-colors">Top &uarr;</a>
+				<a href="#about" class="hover:text-[#9a0002] transition-colors">About</a>
+				<a href="#projects" class="hover:text-[#9a0002] transition-colors">Projects</a>
+				<a href="#performance-lab" class="hover:text-[#9a0002] transition-colors">Lab</a>
+				<a href={PERSONAL_INFO.linkedin} target="_blank" rel="noopener noreferrer" class="hover:text-[#9a0002] transition-colors">LinkedIn</a>
 			</div>
 		</div>
 
-		<div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#8f7577]">
+		<div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-[#897870]">
 			<div>
 				&copy; {new Date().getFullYear()} Aishwarya S. Palette: Warm Pearl Ivory (#fbf9f6) &bull; Cherry Cola (#9a0002).
 			</div>

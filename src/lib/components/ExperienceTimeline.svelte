@@ -5,16 +5,13 @@
 	let activeView = $state<'chronological' | 'impact'>('chronological');
 </script>
 
-<section id="experience" class="relative py-20 lg:py-28 bg-[#fbf9f6] border-b border-[#e3dedb] overflow-hidden">
-	<!-- Atmospheric Dual Gradient Blobs & Drafting Grid Canvas (Hero Master Brand Style) -->
-	<div class="dreamy-canvas">
+<section id="experience" class="relative py-20 lg:py-28 bg-transparent">
+	<!-- Background Accents: 2 Separated Dreamy Gradient Spreads (Seamless Flow) -->
+	<div class="pointer-events-none absolute inset-0" aria-hidden="true">
 		<!-- Spread 1: Secondary Warm Amber/Peach Bloom in top-right -->
 		<div class="dreamy-spread-secondary absolute top-[-6%] right-[-4%] w-[24rem] h-[24rem] md:w-[30rem] md:h-[30rem]"></div>
 		<!-- Spread 2: Primary Ruby/Cherry Bloom in bottom-left -->
 		<div class="dreamy-spread-primary absolute bottom-[-6%] left-[-4%] w-[26rem] h-[26rem] md:w-[32rem] md:h-[32rem]"></div>
-		<!-- Subtle Fine Architectural Grid & Tactile Airbrush Film-Grain -->
-		<div class="dreamy-grid"></div>
-		<div class="dreamy-grain"></div>
 	</div>
 
 	<div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
